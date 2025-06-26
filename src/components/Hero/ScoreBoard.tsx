@@ -1,6 +1,6 @@
 import Image from "next/image";
 import * as motion from "motion/react-client";
-import { gameScores, IGameScore } from "@/constants/gameScores";
+import { gameScores } from "@/constants/gameScores";
 import { formatDate } from "@/utils/formatterDate";
 
 const ScoreBoard = () => {
