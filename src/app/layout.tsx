@@ -4,7 +4,6 @@ import "./globals.css";
 
 const manrope = Manrope({
   variable: "--font-Manrope",
-
   subsets: ["latin"],
 });
 
