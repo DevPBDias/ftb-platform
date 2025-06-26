@@ -1,6 +1,6 @@
 import Image from "next/image";
 import * as motion from "motion/react-client";
-import { gameScores } from "@/constants/gameScores";
+import { gameScores, IGameScore } from "@/constants/gameScores";
 import { formatDate } from "@/utils/formatterDate";
 
 const ScoreBoard = () => {
@@ -23,7 +23,7 @@ const ScoreBoard = () => {
           </span>
         </div>
         <section className="grid grid-cols-5 items-center justify-center w-full gap-16">
-          {gameScores.map((game: any, index: number) => (
+          {gameScores.map((game, index) => (
             <div
               key={index}
               className="flex flex-col items-start justify-between w-full rounded-lg gap-4"

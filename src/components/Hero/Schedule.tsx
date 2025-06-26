@@ -1,6 +1,4 @@
 "use client";
-import logoA from "@/assets/teamA.png";
-import logoB from "@/assets/teamB.png";
 import { gamesData } from "@/constants/ScheduleGames";
 import * as motion from "motion/react-client";
 import Image from "next/image";

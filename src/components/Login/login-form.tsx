@@ -10,6 +10,11 @@ import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { userSchema } from "@/schemas/login-schema";
 
+type UserFormData = {
+  email: string;
+  password: string;
+};
+
 export function LoginForm({
   className,
   ...props
@@ -23,7 +28,7 @@ export function LoginForm({
     resolver: zodResolver(userSchema),
   });
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: UserFormData) => console.log(data);
 
   return (
     <form
