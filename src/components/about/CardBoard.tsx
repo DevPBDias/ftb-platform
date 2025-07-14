@@ -5,7 +5,7 @@ import ProfessionalCard from "./ProfessionalCard";
 const CardBoard = () => {
   return (
     <motion.div
-      className="absolute -bottom-3/6 left-0 w-full flex flex-col items-start justify-center p-9 gap-9 rounded-lg px-48"
+      className="absolute -bottom-3/6 left-0 w-full flex flex-col items-start justify-center p-9 gap-9 rounded-lg px-4 2xl:px-48"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{
@@ -14,7 +14,7 @@ const CardBoard = () => {
         ease: [0, 0.71, 0.2, 1.01],
       }}
     >
-      <section className="grid grid-cols-3 items-center justify-center w-full gap-8">
+      <section className="hidden lg:grid grid-cols-3 items-center justify-center w-full gap-8">
         {members.map((member, index) => (
           <ProfessionalCard key={index} data={member} />
         ))}

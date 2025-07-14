@@ -3,6 +3,7 @@ import logoB from "@/assets/teamB.png";
 import { StaticImageData } from "next/image";
 
 export type IGameScore = {
+  id: number;
   team1: {
     name: string;
     logo: StaticImageData;
@@ -20,6 +21,7 @@ export type IGameScore = {
 
 export const gameScores: IGameScore[] = [
   {
+    id: 1,
     team1: { name: "Time A", logo: logoA },
     score1: 100,
     team2: { name: "Time B", logo: logoB },
@@ -29,6 +31,7 @@ export const gameScores: IGameScore[] = [
     number: 1,
   },
   {
+    id: 2,
     team1: { name: "Time A", logo: logoA },
     score1: 100,
     team2: { name: "Time B", logo: logoB },
@@ -38,6 +41,7 @@ export const gameScores: IGameScore[] = [
     number: 1,
   },
   {
+    id: 3,
     team1: { name: "Time A", logo: logoA },
     score1: 100,
     team2: { name: "Time B", logo: logoB },
@@ -47,6 +51,7 @@ export const gameScores: IGameScore[] = [
     number: 1,
   },
   {
+    id: 4,
     team1: { name: "Time A", logo: logoA },
     score1: 100,
     team2: { name: "Time B", logo: logoB },
@@ -56,6 +61,7 @@ export const gameScores: IGameScore[] = [
     number: 1,
   },
   {
+    id: 5,
     team1: { name: "Time A", logo: logoA },
     score1: 100,
     team2: { name: "Time B", logo: logoB },

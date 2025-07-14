@@ -7,7 +7,7 @@ import ScoreBoard from "./ScoreBoard";
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full h-[100dvh] flex flex-col items-center justify-center">
+    <section className="relative w-full h-[100dvh] flex flex-col  items-start lg:items-center justify-start lg:justify-center">
       <picture className="w-full h-full">
         <Image
           src={heroImg}

@@ -6,7 +6,7 @@ import * as motion from "motion/react-client";
 export default function AnimatedAboutSection() {
   return (
     <motion.div
-      className="absolute top-0 left-0 w-full h-full flex flex-row items-center justify-start gap-96 px-48"
+      className="absolute top-0 left-0 w-full lg:mt-0 h-full flex flex-col lg:flex-row items-center justify-center gap-48 lg:gap-96 px-4 2xl:px-48"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{
@@ -15,11 +15,9 @@ export default function AnimatedAboutSection() {
         ease: [0, 0.71, 0.2, 1.01],
       }}
     >
-      <div className="flex flex-col items-start justify-center w-2/5 h-full gap-4 ">
-        <h1 className="text-white text-4xl md:text-6xl font-bold">
-          Conheça a história da nossa Federação de Basquete
-        </h1>
-      </div>
+      <h1 className="text-white text-3xl md:text-4xl lg::text-6xl font-bold text-center lg:text-left w-full lg:w-2/5">
+        Conheça a história da nossa Federação de Basquete
+      </h1>
       <motion.div
         animate={{
           y: [0, -30, 0], // Moves up 30px then back
@@ -31,7 +29,7 @@ export default function AnimatedAboutSection() {
           ease: "easeInOut",
         }}
       >
-        <ArrowBigDownDash color="white" size={64} />
+        <ArrowBigDownDash color="white" size={40} />
       </motion.div>
     </motion.div>
   );

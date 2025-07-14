@@ -10,12 +10,14 @@ const HistoryCard = ({ data }: CardProps) => {
   return (
     <div
       className={`flex ${
-        data.id % 2 === 0 ? "flex-row-reverse" : "flex-row"
-      } items-center justify-between w-full gap-16`}
+        data.id % 2 === 0 ? "lg:flex-row-reverse" : "lg:flex-row"
+      } flex-col items-center justify-between w-full gap-16`}
     >
       <div className="flex flex-col items-start justify-start gap-4 w-full">
         <h3 className="text-lg font-semibold">{data.year}</h3>
-        <p className="text-gray-700 text-balance">{data.description}</p>
+        <p className="text-gray-700 text-balance text-justify">
+          {data.description}
+        </p>
       </div>
       <picture className="w-full h-[420px] overflow-hidden">
         <Image

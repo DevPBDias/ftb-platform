@@ -8,7 +8,7 @@ import Image from "next/image";
 const Navbar = () => {
   return (
     <motion.div
-      className="absolute top-0 left-0 z-10 w-full flex items-center justify-between px-48 py-4"
+      className="absolute top-0 left-0 z-10 w-full flex items-center justify-between px-4 2xl:px-48 py-4"
       initial={{ opacity: 0, scale: 0.3 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{
@@ -21,13 +21,13 @@ const Navbar = () => {
         <Image
           src={logoFTB}
           alt="Logo FTB"
-          className="w-20 h-20 object-cover"
+          className="w-12 h-12 lg:w-20 lg:h-20 object-cover"
         />
-        <p className="font-normal text-base text-white w-32">
+        <p className="font-normal text-xs lg:text-base text-white w-32">
           Federação Tocantinense de Basketball
         </p>
       </Link>
-      <nav className="flex items-center gap-8">
+      <nav className="hidden lg:flex items-center gap-8 ">
         {navLinks.map((item: INavLinks) => (
           <Link
             key={item.name}

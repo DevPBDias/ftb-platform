@@ -36,7 +36,7 @@ const Teams = () => {
         </picture>
         <Navbar />
         <motion.div
-          className="absolute top-0 left-0 w-full h-full flex flex-row items-center justify-between px-48"
+          className="absolute top-0 left-0 w-full h-full flex flex-col lg:flex-row items-center justify-center gap-24 px-4 2xl:px-48"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
@@ -45,16 +45,14 @@ const Teams = () => {
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
-          <div className="flex flex-col items-start justify-center w-[52%] h-full gap-4">
-            <h1 className="text-white text-4xl md:text-6xl font-bold">
-              CONHEÇA OS CLUBES E ESCOLAS PARTICIPANTES DE NOSSAS COMPETIÇÕES
-            </h1>
-          </div>
-          <div className="grid grid-cols-3 gap-4 md:gap-6 items-center justify-center">
+          <h1 className="text-white text-2xl md:text-4xl font-bold w-full md:w-3/5 text-center lg:w-1/2 lg:text-left 2xl:w-1/3">
+            CONHEÇA OS CLUBES E ESCOLAS PARTICIPANTES DE NOSSAS COMPETIÇÕES
+          </h1>
+          <div className="grid grid-cols-3 gap-3 md:gap-6 items-center justify-center">
             {TEAMS_LOGO.map((logo, index) => (
               <picture
                 key={index}
-                className="cursor-pointer w-24 h-24 md:w-32 md:h-32 rounded-lg border-2 border-white transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-amber-500"
+                className="cursor-pointer w-20 h-20 md:w-32 md:h-32 rounded-lg border-2 border-white transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-amber-500"
                 onClick={() => route.push(`/clubes/${index + 1}`)}
               >
                 <Image

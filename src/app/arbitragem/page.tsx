@@ -21,7 +21,7 @@ const RefereePage = () => {
         </picture>
         <Navbar />
         <motion.div
-          className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-48 gap-6"
+          className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-3 md:px-6 2xl:px-48 gap-6"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
@@ -31,14 +31,14 @@ const RefereePage = () => {
           }}
         >
           <div className="flex flex-col items-center justify-center w-full h-full gap-18 ">
-            <h1 className="text-white text-4xl md:text-6xl font-bold w-2/3 text-center mt-32">
+            <h1 className="text-white text-3xl md:text-4xl xl:text-6xl font-bold w-full lg:w-2/3 text-center mt-32">
               Quem Faz as Regras Valerem Dentro de Quadra
             </h1>
-            <div className="grid grid-cols-5 gap-6 items-center justify-center">
+            <div className="flex flex-wrap flex-row gap-2 2xl:gap-4 items-center justify-center">
               {refereeData.map((item, index) => (
                 <picture
                   key={index}
-                  className="relative lg:w-60 lg:h-60 rounded-lg hover:scale-105 transition-transform duration-300"
+                  className="relative w-[108px] h-[108px] md:w-40 md:h-40 2xl:w-52 2xl:h-52 rounded-lg hover:scale-105 transition-transform duration-300"
                 >
                   <Image
                     src={item.image}
@@ -46,8 +46,10 @@ const RefereePage = () => {
                     className="w-full h-full object-cover rounded-lg"
                   />
                   <div className="absolute z-10 bottom-0 left-0 px-3 py-2 w-full bg-blue-950/90 flex flex-col items-start justify-center text-white rounded-b-lg">
-                    <h4 className="font-bold  text-lg">{item.name}</h4>
-                    <p className="text-sm font-normal">
+                    <h4 className="text-xs font-bold md:text-base  lg:text-lg">
+                      {item.name}
+                    </h4>
+                    <p className="hidden lg:flex text-sm font-normal">
                       {item.jobFunction} - {item.experience} anos
                     </p>
                   </div>
