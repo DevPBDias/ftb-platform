@@ -3,7 +3,7 @@
 import logoA from "@/assets/teamA.png";
 import logoB from "@/assets/teamB.png";
 import { AnimatePresence, motion, wrap } from "motion/react";
-import { forwardRef, type SVGProps, useState } from "react";
+import { forwardRef, useState } from "react";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -145,66 +145,3 @@ const Slide = forwardRef(function Slide(
     </motion.div>
   );
 });
-
-/**
- * ==============   Icons   ================
- */
-const iconsProps: SVGProps<SVGSVGElement> = {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "20",
-  height: "20",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: "2",
-  strokeLinecap: "round",
-  strokeLinejoin: "round",
-};
-
-function ArrowLeft() {
-  return (
-    <svg {...iconsProps}>
-      <path d="m12 19-7-7 7-7" />
-      <path d="M19 12H5" />
-    </svg>
-  );
-}
-
-function ArrowRight() {
-  return (
-    <svg {...iconsProps}>
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
-    </svg>
-  );
-}
-
-function MapPin() {
-  return (
-    <svg {...iconsProps}>
-      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  );
-}
-
-function Calendar() {
-  return (
-    <svg {...iconsProps}>
-      <path d="M8 2v4" />
-      <path d="M16 2v4" />
-      <rect width="18" height="18" x="3" y="4" rx="2" />
-      <path d="M3 10h18" />
-    </svg>
-  );
-}
-
-function Soccer() {
-  return (
-    <svg {...iconsProps} width="12" height="12">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-      <path d="M2 12h20" />
-    </svg>
-  );
-}
