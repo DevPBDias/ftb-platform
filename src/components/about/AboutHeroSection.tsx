@@ -4,6 +4,7 @@ import heroImg from "@/assets/bg-about2.png";
 import Navbar from "../Hero/Navbar";
 import AnimatedAboutSection from "./ContentAbout";
 import CardBoard from "./CardBoard";
+import MobileHeader from "../header/MobileHeader";
 
 const AboutHeroSection = () => {
   return (
@@ -16,6 +17,7 @@ const AboutHeroSection = () => {
         />
       </picture>
       <Navbar />
+      <MobileHeader />
       <AnimatedAboutSection />
       <CardBoard />
     </section>

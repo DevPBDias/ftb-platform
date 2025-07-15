@@ -14,6 +14,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowLeftCircle, ArrowRightCircle } from "lucide-react";
 import { use } from "react";
+import MobileHeader from "@/components/header/MobileHeader";
 
 const AVATARS = [avatar1, avatar2, avatar3, avatar4];
 
@@ -36,6 +37,7 @@ export default function TeamPage({
           />
         </picture>
         <Navbar />
+        <MobileHeader />
         <motion.div
           className="absolute top-0 left-0 w-full flex flex-col items-start justify-center px-4 2xl:px-48 text-white gap-10 mt-40 bg-blue-950 2xl:bg-transparent py-8"
           initial={{ opacity: 0, scale: 0.5 }}

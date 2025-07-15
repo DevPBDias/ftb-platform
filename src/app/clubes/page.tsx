@@ -8,6 +8,7 @@ import teamB from "@/assets/teamB.png";
 import teamC from "@/assets/teamC.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import MobileHeader from "@/components/header/MobileHeader";
 
 const TEAMS_LOGO = [
   teamA,
@@ -35,6 +36,7 @@ const Teams = () => {
           />
         </picture>
         <Navbar />
+        <MobileHeader />
         <motion.div
           className="absolute top-0 left-0 w-full h-full flex flex-col lg:flex-row items-center justify-center gap-24 px-4 2xl:px-48"
           initial={{ opacity: 0, scale: 0.5 }}

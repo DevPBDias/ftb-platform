@@ -38,7 +38,7 @@ const Navbar = () => {
           </Link>
         ))}
       </nav>
-      <div className="flex items-center">
+      <div className="hidden lg:flex items-center">
         {socialMedia.map((item: ISocialMedia) => (
           <Link
             key={item.id}

@@ -7,6 +7,7 @@ import bg_referee from "@/assets/bg-referee.png";
 import { refereeData } from "@/constants/refereeData";
 import Image from "next/image";
 import React from "react";
+import MobileHeader from "@/components/header/MobileHeader";
 
 const RefereePage = () => {
   return (
@@ -20,6 +21,7 @@ const RefereePage = () => {
           />
         </picture>
         <Navbar />
+        <MobileHeader />
         <motion.div
           className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-3 md:px-6 2xl:px-48 gap-6"
           initial={{ opacity: 0, scale: 0.5 }}
