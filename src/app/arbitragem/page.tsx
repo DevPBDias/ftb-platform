@@ -23,7 +23,7 @@ const RefereePage = () => {
         <Navbar />
         <MobileHeader />
         <motion.div
-          className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-3 md:px-6 2xl:px-48 gap-6"
+          className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-[5%] lg:px-[10%] 2xl:px-[15%] gap-6"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{

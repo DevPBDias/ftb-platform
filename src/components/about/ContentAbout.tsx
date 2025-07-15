@@ -6,7 +6,7 @@ import * as motion from "motion/react-client";
 export default function AnimatedAboutSection() {
   return (
     <motion.div
-      className="absolute top-0 left-0 w-full lg:mt-0 h-full flex flex-col lg:flex-row items-center justify-center gap-48 lg:gap-96 px-4 2xl:px-48"
+      className="absolute top-0 left-0 w-full lg:mt-0 h-full flex flex-col lg:flex-row items-center justify-center gap-48 lg:gap-96 px-[5%] lg:px-[10%] 2xl:px-[15%]"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{
