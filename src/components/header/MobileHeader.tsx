@@ -23,14 +23,14 @@ const MobileHeader = () => {
       {isOpen ? (
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="absolute top-6 right-6 z-20 p-2 bg-white rounded-full"
+          className="absolute top-6 right-6 z-40 p-2 bg-white rounded-full"
         >
           <AlignRight size={18} color="#162456" />
         </button>
       ) : (
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="absolute top-6 right-4 z-20 p-2 bg-white rounded-full"
+          className="absolute top-6 right-4 z-40 p-2 bg-white rounded-full"
         >
           <X size={18} color="#162456" />
         </button>
@@ -38,7 +38,7 @@ const MobileHeader = () => {
       <section
         className={` ${
           isOpen ? "hidden" : "flex"
-        } absolute top-0 left-0 z-10 w-full flex flex-col items-center justify-center gap-20 px-4 py-4 bg-blue-950 h-3/4`}
+        } absolute top-0 left-0 z-30 w-full flex flex-col items-center justify-center  gap-20 px-4 py-4 bg-blue-950 h-3/4`}
       >
         <div className="flex flex-row items-center justify-center">
           {socialMedia.map((item: ISocialMedia) => (
