@@ -1,10 +1,7 @@
 import { StaticImageData } from "next/image";
-import refereeImage1 from "@/assets/avatar1.png";
-import refereeImage2 from "@/assets/avatar2.png";
-import refereeImage3 from "@/assets/avatar2.png";
-import refereeImage4 from "@/assets/avatar4.png";
-import refereeImage5 from "@/assets/avatar1.png";
-import refereeImage6 from "@/assets/avatar3.png";
+import error_img from "@/assets/error-image.png";
+import joao_davi_img from "@/assets/arbitros/joao-davi.jpeg";
+import victor_hugo_img from "@/assets/arbitros/victor-hugo.jpeg";
 
 export type RefereeData = {
   id: number;
@@ -17,72 +14,30 @@ export type RefereeData = {
 export const refereeData: RefereeData[] = [
   {
     id: 1,
-    name: "John Doe",
-    experience: 5,
-    jobFunction: "Senior Referee",
-    image: refereeImage1,
+    name: "Paulo Bruno",
+    experience: 1,
+    jobFunction: "Júnior",
+    image: error_img,
   },
   {
     id: 2,
-    name: "Jane Smith",
-    experience: 3,
-    jobFunction: "Assistant Referee",
-    image: refereeImage2,
+    name: "João Davi",
+    experience: 1,
+    jobFunction: "Júnior",
+    image: joao_davi_img,
   },
   {
     id: 3,
-    name: "Mike Johnson",
-    experience: 7,
-    jobFunction: "Referee Supervisor",
-    image: refereeImage3,
+    name: "Victor Hugo",
+    experience: 6,
+    jobFunction: "Pleno",
+    image: victor_hugo_img,
   },
   {
     id: 4,
-    name: "Emily Davis",
-    experience: 4,
-    jobFunction: "Junior Referee",
-    image: refereeImage4,
-  },
-  {
-    id: 5,
-    name: "Chris Brown",
-    experience: 6,
-    jobFunction: "Senior Referee",
-    image: refereeImage5,
-  },
-  {
-    id: 6,
-    name: "Sarah Wilson",
-    experience: 2,
-    jobFunction: "Assistant Referee",
-    image: refereeImage6,
-  },
-  {
-    id: 7,
-    name: "David Lee",
+    name: "Renata Reis",
     experience: 8,
-    jobFunction: "Referee Supervisor",
-    image: refereeImage1,
-  },
-  {
-    id: 8,
-    name: "Laura Green",
-    experience: 5,
-    jobFunction: "Junior Referee",
-    image: refereeImage2,
-  },
-  {
-    id: 9,
-    name: "James White",
-    experience: 4,
-    jobFunction: "Senior Referee",
-    image: refereeImage3,
-  },
-  {
-    id: 10,
-    name: "Olivia Brown",
-    experience: 3,
-    jobFunction: "Assistant Referee",
-    image: refereeImage4,
+    jobFunction: "Sênior",
+    image: error_img,
   },
 ];

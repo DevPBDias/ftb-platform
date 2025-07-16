@@ -3,24 +3,10 @@
 import * as motion from "motion/react-client";
 import Navbar from "@/components/Hero/Navbar";
 import bg_teams from "@/assets/bg_teams.png";
-import teamA from "@/assets/teamA.png";
-import teamB from "@/assets/teamB.png";
-import teamC from "@/assets/teamC.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import MobileHeader from "@/components/header/MobileHeader";
-
-const TEAMS_LOGO = [
-  teamA,
-  teamB,
-  teamC,
-  teamA,
-  teamB,
-  teamC,
-  teamA,
-  teamB,
-  teamC,
-];
+import { teamsData } from "@/constants/teams";
 
 const Teams = () => {
   const route = useRouter();
@@ -47,22 +33,34 @@ const Teams = () => {
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
-          <h1 className="text-white text-2xl md:text-4xl font-bold w-full md:w-3/5 text-center lg:w-1/2 lg:text-left 2xl:w-1/3">
-            CONHEÇA OS CLUBES E ESCOLAS PARTICIPANTES DE NOSSAS COMPETIÇÕES
+          <h1 className="text-white text-2xl md:text-4xl 2xl:text-5xl font-bold w-full md:w-3/5 text-center lg:w-1/2 lg:text-left 2xl:w-2/5 uppercase tracking-wider">
+            Conheça os times que arrasam em nossas quadras
           </h1>
           <div className="grid grid-cols-3 gap-3 md:gap-6 items-center justify-center">
-            {TEAMS_LOGO.map((logo, index) => (
-              <picture
-                key={index}
-                className="cursor-pointer w-20 h-20 md:w-32 md:h-32 rounded-lg border-2 border-white transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-amber-500"
-                onClick={() => route.push(`/clubes/${index + 1}`)}
-              >
-                <Image
-                  src={logo}
-                  alt={`Team logo ${index + 1}`}
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              </picture>
+            {teamsData.map((team) => (
+              <>
+                {team.logo === "TIOS" ? (
+                  <p
+                    key={team.id}
+                    onClick={() => route.push(`/clubes/${team.id}`)}
+                    className="cursor-pointer w-20 h-20 md:w-32 md:h-32 rounded-lg flex items-center justify-center uppercase text-red-500 font-bold text-5xl border-2 border-white transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-white"
+                  >
+                    {team.logo}
+                  </p>
+                ) : (
+                  <picture
+                    key={team.id}
+                    className="cursor-pointer w-20 h-20 md:w-32 md:h-32 rounded-lg border-2 border-white transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-amber-500"
+                    onClick={() => route.push(`/clubes/${team.id}`)}
+                  >
+                    <Image
+                      src={team.logo || ""}
+                      alt={`Team logo ${team.teamName}`}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </picture>
+                )}
+              </>
             ))}
           </div>
         </motion.div>

@@ -3,10 +3,8 @@
 import * as motion from "motion/react-client";
 import Navbar from "@/components/Hero/Navbar";
 import bg_referee from "@/assets/bg-referee.png";
-
 import { refereeData } from "@/constants/refereeData";
 import Image from "next/image";
-import React from "react";
 import MobileHeader from "@/components/header/MobileHeader";
 
 const RefereePage = () => {
@@ -52,7 +50,8 @@ const RefereePage = () => {
                       {item.name}
                     </h4>
                     <p className="hidden lg:flex text-sm font-normal">
-                      {item.jobFunction} - {item.experience} anos
+                      {item.jobFunction} - {item.experience}{" "}
+                      {item.experience > 1 ? "anos" : "ano"}
                     </p>
                   </div>
                 </picture>

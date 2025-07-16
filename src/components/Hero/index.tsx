@@ -4,7 +4,6 @@ import heroImg from "@/assets/hero_img.png";
 import AnimatedHeroSection from "./ContentHero";
 import Navbar from "./Navbar";
 import ScoreBoard from "./ScoreBoard";
-import MobileHeader from "../header/MobileHeader";
 
 const HeroSection = () => {
   return (
@@ -17,7 +16,6 @@ const HeroSection = () => {
         />
       </picture>
       <Navbar />
-      <MobileHeader />
       <AnimatedHeroSection />
       <ScoreBoard />
     </section>

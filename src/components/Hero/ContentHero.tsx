@@ -28,20 +28,6 @@ export default function AnimatedHeroSection() {
           Saiba mais
         </button>
       </div>
-      <motion.div
-        className="lg:hidden md:-mt-40"
-        animate={{
-          y: [0, -30, 0], // Moves up 30px then back
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          repeatType: "loop",
-          ease: "easeInOut",
-        }}
-      >
-        <ArrowBigDownDash color="white" size={36} />
-      </motion.div>
       <Schedule />
     </motion.div>
   );
