@@ -9,7 +9,7 @@ export type CardData = {
   date: string;
   description?: string;
   imageUrl: StaticImageData;
-  type: "noticia" | "evento";
+  type: "noticia" | "competicao";
 };
 
 export const cardsData: CardData[] = [
@@ -44,24 +44,24 @@ export const cardsData: CardData[] = [
 
   // Próximos eventos
   {
-    id: "evento-1",
+    id: "competicao-1",
     title: "Taça 13 Sunset",
     date: "13/06",
     imageUrl: image3,
-    type: "evento",
+    type: "competicao",
   },
   {
-    id: "evento-2",
+    id: "competicao-2",
     title: "Curso de arbitragem 5x5",
     date: "13/06",
     imageUrl: image2,
-    type: "evento",
+    type: "competicao",
   },
   {
-    id: "evento-3",
+    id: "competicao-3",
     title: "Tocantinense sub 15 e 17",
     date: "13/06",
     imageUrl: image1,
-    type: "evento",
+    type: "competicao",
   },
 ];

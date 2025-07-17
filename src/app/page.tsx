@@ -15,12 +15,12 @@ export default function Home() {
         className="mt-8 lg:mt-64"
         btnName="Notícias"
         title="Últimas notícias"
-        type="noticia"
+        type="noticias"
       />
       <ContainerNewsEvents
-        btnName="Eventos"
-        title="Próximos eventos"
-        type="evento"
+        btnName="Competições"
+        title="Próximas competições"
+        type="competicoes"
       />
       <PhotosGallery />
       <Footer />

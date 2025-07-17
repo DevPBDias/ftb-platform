@@ -1,13 +1,24 @@
-import { cardsData } from "@/constants/news-events";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { PlusCircle } from "lucide-react";
-import React from "react";
 import InfoCard from "../Card/InfoCard";
 import Link from "next/link";
+import { StaticImageData } from "next/image";
+
+interface CardData {
+  id?: string;
+  titulo: string;
+  descricao: string;
+  datas: string[];
+  local: string;
+  image?: string | StaticImageData | undefined;
+}
 
 interface ContainerNewsEventsProps {
   title: string;
   btnName: string;
-  type: "noticia" | "evento";
+  type: "noticias" | "competicoes";
   className?: string;
 }
 
@@ -17,6 +28,24 @@ const ContainerNewsEvents = ({
   type,
   className,
 }: ContainerNewsEventsProps) => {
+  const [cards, setCards] = useState<CardData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/${type}`);
+        const data = await res.json();
+        setCards(data);
+      } catch (err) {
+        console.error(`Erro ao buscar ${type}:`, err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [type]);
+
   return (
     <section
       className={`${className} flex flex-col items-start justify-start gap-4 w-full p-4 bg-white 2xl:px-48 mb-16`}
@@ -31,11 +60,17 @@ const ContainerNewsEvents = ({
           <p className="font-bold text-lg">{btnName}</p>
         </Link>
       </header>
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-20 w-full">
-        {cardsData.map(
-          (card) => card.type === type && <InfoCard key={card.id} data={card} />
-        )}
-      </section>
+
+      {loading ? (
+        <p className="text-gray-500 italic">Carregando {type}...</p>
+      ) : (
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-20 w-full">
+          {cards.map((card, index) => (
+            <InfoCard key={card.id || index} data={card} />
+          ))}
+        </section>
+      )}
+
       <Link
         href={`/${type}s`}
         className="flex items-center mt-4 gap-2 bg-yellow-500 rounded-lg py-3 w-full lg:hidden justify-center hover:bg-yellow-600 hover:scale-105 transition-all duration-300 ease-in-out shadow-lg"
