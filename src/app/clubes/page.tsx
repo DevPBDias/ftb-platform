@@ -3,13 +3,68 @@
 import * as motion from "motion/react-client";
 import Navbar from "@/components/Hero/Navbar";
 import bg_teams from "@/assets/bg_teams.png";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 import MobileHeader from "@/components/header/MobileHeader";
-import { teamsData } from "@/constants/teams";
+import { useEffect, useState } from "react";
+
+interface TeamData {
+  logo?: StaticImageData | string;
+  id: number;
+  teamName: string;
+  admins: {
+    id: number;
+    name: string;
+    image: StaticImageData;
+    role?: string;
+  }[];
+  image: StaticImageData;
+  description: string;
+  championships?: {
+    id: number;
+    name: string;
+    years: number[];
+    quantity: number;
+    category: string;
+  }[];
+  contact?: string;
+}
 
 const Teams = () => {
   const route = useRouter();
+  const [clubes, setClubes] = useState<TeamData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchClubes() {
+      try {
+        const response = await fetch("/api/clubes"); // Nova rota da API
+        const data: TeamData[] = await response.json();
+        setClubes(data);
+      } catch (e) {
+        console.error("Erro ao buscar clubes:", e);
+        setError((e as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchClubes();
+  }, []);
+
+  if (loading) {
+    return (
+      <p className="text-center text-white text-lg">Carregando clubes...</p>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-red-100 text-red-700">
+        <p className="text-xl">Erro ao carregar clubes: {error}</p>
+      </div>
+    );
+  }
 
   return (
     <main className="flex flex-col items-center justify-center w-full">
@@ -37,7 +92,7 @@ const Teams = () => {
             Conheça os times que arrasam em nossas quadras
           </h1>
           <div className="grid grid-cols-3 gap-3 md:gap-6 items-center justify-center">
-            {teamsData.map((team) => (
+            {clubes.map((team) => (
               <>
                 {team.logo === "TIOS" ? (
                   <p
@@ -54,6 +109,9 @@ const Teams = () => {
                     onClick={() => route.push(`/clubes/${team.id}`)}
                   >
                     <Image
+                      width={100}
+                      height={100}
+                      priority
                       src={team.logo || ""}
                       alt={`Team logo ${team.teamName}`}
                       className="w-full h-full object-cover rounded-lg"

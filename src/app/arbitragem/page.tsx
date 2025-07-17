@@ -3,11 +3,54 @@
 import * as motion from "motion/react-client";
 import Navbar from "@/components/Hero/Navbar";
 import bg_referee from "@/assets/bg-referee.png";
-import { refereeData } from "@/constants/refereeData";
 import Image from "next/image";
+import React, { useEffect, useState } from "react";
 import MobileHeader from "@/components/header/MobileHeader";
+import userPhoto from "@/assets/error-image.png";
+
+interface Arbitro {
+  id: string;
+  name: string;
+  experience: string;
+  years: number;
+  photo: string;
+}
 
 const RefereePage = () => {
+  const [arbitros, setArbitros] = useState<Arbitro[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchArbitros() {
+      try {
+        const response = await fetch("/api/arbitros"); // Nova rota da API
+        const data: Arbitro[] = await response.json();
+        setArbitros(data);
+      } catch (e) {
+        console.error("Erro ao buscar árbitros:", e);
+        setError((e as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchArbitros();
+  }, []);
+
+  if (loading) {
+    return (
+      <p className="text-center text-white text-lg">Carregando árbitros...</p>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-red-100 text-red-700">
+        <p className="text-xl">Erro ao carregar árbitros: {error}</p>
+      </div>
+    );
+  }
+
   return (
     <main className="flex flex-col items-center justify-center w-full">
       <section className="relative w-full h-[100dvh] flex flex-col items-center justify-center">
@@ -16,12 +59,13 @@ const RefereePage = () => {
             src={bg_referee}
             alt="Image of a player holding a basketball in the middle of a park"
             className="w-full h-full object-cover"
+            priority
           />
         </picture>
         <Navbar />
         <MobileHeader />
         <motion.div
-          className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-[5%] lg:px-[10%] 2xl:px-[15%] gap-6"
+          className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-[3%] lg:px-[8%] 2xl:px-[8%] gap-6"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
@@ -30,32 +74,59 @@ const RefereePage = () => {
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
-          <div className="flex flex-col items-center justify-center w-full h-full gap-18 ">
-            <h1 className="text-white text-3xl md:text-4xl xl:text-6xl font-bold w-full lg:w-2/3 text-center mt-32">
-              Quem Faz as Regras Valerem Dentro de Quadra
+          <div className="flex flex-col items-center justify-center w-full h-full gap-12 ">
+            <h1 className="text-white text-3xl md:text-4xl font-bold w-full lg:w-3/4 text-center mt-24">
+              Quem faz as regras valerem dentro de quadra
             </h1>
-            <div className="flex flex-wrap flex-row gap-2 2xl:gap-4 items-center justify-center">
-              {refereeData.map((item, index) => (
-                <picture
-                  key={index}
-                  className="relative w-[108px] h-[108px] md:w-40 md:h-40 2xl:w-52 2xl:h-52 rounded-lg hover:scale-105 transition-transform duration-300"
-                >
-                  <Image
-                    src={item.image}
-                    alt={`Team logo ${index + 1}`}
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                  <div className="absolute z-10 bottom-0 left-0 px-3 py-2 w-full bg-blue-950/90 flex flex-col items-start justify-center text-white rounded-b-lg">
-                    <h4 className="text-xs font-bold md:text-base  lg:text-lg">
-                      {item.name}
-                    </h4>
-                    <p className="hidden lg:flex text-sm font-normal">
-                      {item.jobFunction} - {item.experience}{" "}
-                      {item.experience > 1 ? "anos" : "ano"}
-                    </p>
-                  </div>
-                </picture>
-              ))}
+            <div className="flex flex-wrap flex-row gap-2 2xl:gap-4 items-center justify-center w-full">
+              {arbitros.length === 0 ? (
+                <p className="text-center text-white text-lg">
+                  Nenhum árbitro encontrado no banco de dados.
+                </p>
+              ) : (
+                arbitros.map((item) => (
+                  <picture
+                    key={item.id}
+                    className="relative w-[108px] h-[108px] md:w-40 md:h-40 2xl:w-52 2xl:h-60 rounded-lg hover:scale-105 transition-transform duration-300"
+                  >
+                    {item.photo && (
+                      <Image
+                        src={item.photo}
+                        alt={`Árbitro ${item.name}`}
+                        className="w-full h-full object-cover rounded-lg"
+                        fill
+                        priority
+                        onError={(e) => {
+                          e.currentTarget.src = `https://placehold.co/208x208/cccccc/333333?text=Foto`;
+                        }}
+                      />
+                    )}
+                    {!item.photo && (
+                      <picture className="w-full h-full flex items-center justify-center bg-gray-200 rounded-lg text-gray-500 text-xs">
+                        <Image
+                          src={userPhoto}
+                          alt={`Árbitro ${item.name}`}
+                          className="w-full h-full object-cover rounded-lg"
+                          fill
+                          priority
+                          onError={(e) => {
+                            e.currentTarget.src = `https://placehold.co/208x208/cccccc/333333?text=Foto`;
+                          }}
+                        />
+                      </picture>
+                    )}
+                    <div className="absolute z-10 bottom-0 left-0 px-3 py-2 w-full bg-blue-950/90 flex flex-col items-start justify-center text-white rounded-b-sm">
+                      <h4 className="text-xs font-bold md:text-base lg:text-lg">
+                        {item.name}
+                      </h4>
+                      <p className="hidden lg:flex text-sm font-normal">
+                        {item.experience} - {item.years}{" "}
+                        {item.years > 1 ? "anos" : "ano"}
+                      </p>
+                    </div>
+                  </picture>
+                ))
+              )}
             </div>
           </div>
         </motion.div>
