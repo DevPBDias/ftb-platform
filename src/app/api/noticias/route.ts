@@ -29,7 +29,6 @@ export async function POST(request: Request) {
     const data = await request.json(); // Get the JSON body from the request
     const noticiasCollectionRef = collection(firestore, "noticias");
 
-    // Add the document to Firestore
     const docRef = await addDoc(noticiasCollectionRef, data);
 
     return new Response(
