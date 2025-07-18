@@ -20,7 +20,7 @@ interface CompeticaoData {
   image?: string | StaticImageData | undefined;
 }
 
-export default function competicaoDetailPage() {
+export default function CompeticaoDetailPage() {
   const route = useRouter();
   const params = useParams(); // Obtém os parâmetros da URL
   const competicaoId = params.id as string; // O ID do competicao da URL
