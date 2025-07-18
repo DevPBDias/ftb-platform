@@ -7,16 +7,17 @@ import { formatDate } from "@/utils/formatterDate";
 
 interface InfoCardProps {
   data: {
-    _id?: string;
+    id?: string;
     titulo: string;
     descricao: string;
     datas: string[];
     local: string;
     image?: string | StaticImageData;
   };
+  type?: "noticias" | "competicoes";
 }
 
-const InfoCard = ({ data }: InfoCardProps) => {
+const InfoCard = ({ data, type }: InfoCardProps) => {
   const formattedDate = formatDate(data.datas?.[0]) || "Data a definir";
   const imageUrl =
     !data.image || data.image === ""
@@ -41,7 +42,7 @@ const InfoCard = ({ data }: InfoCardProps) => {
         <p className="text-sm w-4/5 line-clamp-2 text-left">{data.descricao}</p>
         <div className="flex items-center justify-between w-full">
           <Link
-            href={`/noticias/${data._id ?? ""}`}
+            href={`/${type}/${data.id}`}
             className="flex items-center gap-2 border-2 border-[#010030] rounded-lg p-2 w-1/2 justify-center hover:bg-blue-200 hover:scale-105 transition-all duration-300 ease-in-out"
           >
             <PlusCircle size={18} color="#010030" />

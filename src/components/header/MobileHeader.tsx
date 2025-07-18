@@ -38,7 +38,7 @@ const MobileHeader = () => {
       <section
         className={` ${
           isOpen ? "hidden" : "flex"
-        } absolute top-0 left-0 z-30 w-full flex flex-col items-center justify-center  gap-20 px-4 py-4 bg-blue-950 h-3/4`}
+        } absolute top-0 left-0 z-30 w-full flex flex-col items-center justify-center  gap-20 px-4 py-4 bg-blue-950 h-[75dvh] transition-all duration-300 ease-in-out`}
       >
         <div className="flex flex-row items-center justify-center">
           {socialMedia.map((item: ISocialMedia) => (
