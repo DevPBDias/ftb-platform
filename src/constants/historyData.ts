@@ -1,11 +1,12 @@
 import { StaticImageData } from "next/image";
-import historyImg1 from "@/assets/free_throws.png";
-import historyImg2 from "@/assets/free_throws.png";
-import historyImg3 from "@/assets/free_throws.png";
-import historyImg4 from "@/assets/free_throws.png";
+import sede from "@/assets/about/sede.png";
+import reuniao from "@/assets/about/votacao-2017.png";
+import votacao from "@/assets/about/votacao-2024.png";
+import treinos from "@/assets/about/treinamentos.png";
 
 export type HistoryType = {
   id: number;
+  title?: string;
   year: number;
   event?: string;
   description: string;
@@ -15,31 +16,36 @@ export type HistoryType = {
 export const historyData: HistoryType[] = [
   {
     id: 1,
-    year: 2000,
-    image: historyImg1,
+    title: "Uma Reunião Histórica para o Basquete Tocantinense",
+    year: 2015,
+    image: reuniao,
     description:
-      "A paixão pelo basquete sempre correu nas veias dos tocantinenses, mas por muitos anos, esse talento permaneceu espalhado em quadras de escolas e projetos sociais, sem a devida organização. Foi justamente a vontade de transformar essa realidade que, em 2010, um grupo de ex-atletas, técnicos e entusiastas decidiu se unir em um movimento histórico: a criação da Federação de Basquete do Tocantins (FBT).",
+      "Em 6 de março de 2015, um encontro marcante reuniu atletas, professores, árbitros e entusiastas do basquete para lutar por melhorias no esporte em Tocantins. Essa reunião histórica pavimentou o caminho para mudanças significativas. Dois anos depois, em 17 de maio de 2017, Rafael Sulino assumiu a presidência da Federação Tocantinense de Basquetebol, com um mandato que se estendeu até 2021.",
   },
   {
     id: 2,
-    year: 2009,
-    image: historyImg2,
+    title:
+      "Federação Tocantinense de Basquetebol Inaugura Nova Sede Administrativa",
+    year: 2018,
+    image: sede,
     description:
-      "A ideia nasceu em uma pequena reunião no ginásio Ayrton Senna, em Palmas, onde, entre bolas quicando e lembranças de grandes jogos, surgiu o compromisso de estruturar o basquete estadual. Homens e mulheres apaixonados pelo esporte, vindos de diversas cidades do Tocantins, deixaram de lado as diferenças e uniram forças por um sonho maior: fazer do basquete uma potência regional.",
+      "O basquete tocantinense agora tem casa própria! A Federação Tocantinense de Basquetebol (FTB) celebrou a inauguração de sua nova sede administrativa. A conquista foi possível graças à permissão de uso por 10 anos de um quiosque na quadra 108 Sul, em Palmas. A permissão, concedida pelo Secretário Municipal de Desenvolvimento Econômico de Palmas, Kariello Coelho, não só abrigará a administração da FTB, mas também servirá de base para o projeto social Arremesso Campeão. Há três anos em atividade, o projeto já atende cerca de 200 crianças e jovens, oferecendo acesso ao esporte e oportunidades de desenvolvimento. A FTB expressa um agradecimento especial ao Secretário Kariello Coelho e ao Instituto Social Saúde Premier, parceiros fundamentais para o crescimento e sucesso do basquete no Tocantins.",
   },
   {
     id: 3,
-    year: 2015,
-    image: historyImg3,
+    title: "Capacitação em Arbitragem de Basquete 3x3",
+    year: 2023,
+    image: treinos,
     description:
-      "O processo não foi fácil. Foram meses de reuniões, debates e burocracias. Mas a persistência e o amor pelo esporte falaram mais alto. Em agosto daquele mesmo ano, a Federação foi oficialmente reconhecida, trazendo consigo a missão de organizar campeonatos, capacitar profissionais e criar oportunidades para jovens talentos que, até então, não tinham visibilidade.",
+      "O primeiro passo para um ano de grandes eventos foi dado! A Federação Tocantinense de Basquetebol realizou com sucesso o Curso de Arbitragem em Basquete 3x3. A Federação agradece imensamente a Maria Cecília pelo excelente trabalho na formação de novos árbitros e na atualização dos profissionais já atuantes. Um agradecimento especial também à Ulbra Palmas pelo apoio na realização do curso, com a disponibilização de seu Complexo Esportivo e a divulgação",
   },
   {
     id: 4,
-    year: 2020,
-    image: historyImg4,
+    year: 2024,
+    title: "Liderança feminina na Federação Tocantinense de Basquetebol",
+    image: votacao,
     event: "Participação em competições nacionais",
     description:
-      "Desde então, a FBT não parou de crescer. Com campeonatos estaduais, programas de base e parcerias educacionais, a federação se tornou o símbolo da transformação social e esportiva no Tocantins. Hoje, a FBT segue firme em seu propósito, mostrando que o basquete vai muito além das quadras — ele constrói sonhos, oportunidades e um futuro melhor para todo o estado.",
+      "Em um movimento histórico, Maria Cecília Nunes Oliveira foi eleita presidente da Federação Tocantinense de Basquetebol na terça-feira, 20 de agosto de 2024. A assembleia extraordinária ocorreu após a renúncia do então presidente Ricardo Papa. Maria Cecília cumprirá mandato até 15 de maio de 2025. Esta eleição marca um marco significativo, pois Maria Cecília é a primeira mulher a ocupar o cargo de presidente na Federação. Sua eleição reforça o compromisso de promover um ambiente inclusivo e democrático dentro do esporte, garantindo que ele seja acessível e acolhedor para todos.",
   },
 ];

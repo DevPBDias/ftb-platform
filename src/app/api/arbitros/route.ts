@@ -22,7 +22,7 @@ export async function GET() {
 
     const arbitrosCollectionRef = collection(firestore, "arbitros");
 
-    const q = query(arbitrosCollectionRef, orderBy("name", "asc"));
+    const q = query(arbitrosCollectionRef, orderBy("experience", "asc"));
 
     console.log(
       "Tentando buscar documentos da coleção 'arbitros' no Firestore..."
@@ -34,15 +34,15 @@ export async function GET() {
       arbitros.push({ id: doc.id, ...(doc.data() as Arbitro) });
     });
 
-    console.log(`Número de competições encontradas: ${arbitros.length}`);
-    console.log("Competições encontradas:", JSON.stringify(arbitros, null, 2));
+    console.log(`Número de arbitros encontradas: ${arbitros.length}`);
+    console.log("Arbitros encontradas:", JSON.stringify(arbitros, null, 2));
 
     return NextResponse.json(arbitros, { status: 200 });
   } catch (error) {
-    console.error("Erro detalhado ao buscar competições na API:", error);
+    console.error("Erro detalhado ao buscar arbitros na API:", error);
     return NextResponse.json(
       {
-        message: "Erro interno do servidor ao buscar competições",
+        message: "Erro interno do servidor ao buscar arbitros",
         error: (error as Error).message,
       },
       { status: 500 }

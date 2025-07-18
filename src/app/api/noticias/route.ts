@@ -1,26 +1,54 @@
-import { collection, getDocs, addDoc } from "firebase/firestore"; // Make sure addDoc is imported
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  addDoc,
+} from "firebase/firestore";
 import { firestore } from "@/lib/firebase"; // Your Firebase instance
+import { NextResponse } from "next/server";
+import { StaticImageData } from "next/image";
 
-export async function GET(request: Request) {
+interface Noticias {
+  id?: string;
+  titulo: string;
+  descricao: string;
+  datas: string[];
+  local: string;
+  image?: string | StaticImageData;
+}
+
+export async function GET() {
   try {
+    console.log("Iniciando requisição GET para /api/noticias...");
+
     const noticiasCollectionRef = collection(firestore, "noticias");
-    const querySnapshot = await getDocs(noticiasCollectionRef);
 
-    const noticias = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    const q = query(noticiasCollectionRef, orderBy("titulo", "asc"));
 
-    return new Response(JSON.stringify(noticias), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
+    console.log(
+      "Tentando buscar documentos da coleção 'noticias' no Firestore..."
+    );
+    const snapshot = await getDocs(q);
+
+    const noticias: Noticias[] = [];
+    snapshot.forEach((doc) => {
+      noticias.push({ id: doc.id, ...(doc.data() as Noticias) });
     });
+
+    console.log(`Número de noticias encontradas: ${noticias.length}`);
+    console.log("Noticias encontradas:", JSON.stringify(noticias, null, 2));
+
+    return NextResponse.json(noticias, { status: 200 });
   } catch (error) {
-    console.error("Error fetching noticias:", error);
-    return new Response(JSON.stringify({ error: "Failed to fetch news" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    console.error("Erro detalhado ao buscar noticias na API:", error);
+    return NextResponse.json(
+      {
+        message: "Erro interno do servidor ao buscar noticias",
+        error: (error as Error).message,
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -29,6 +57,7 @@ export async function POST(request: Request) {
     const data = await request.json(); // Get the JSON body from the request
     const noticiasCollectionRef = collection(firestore, "noticias");
 
+    // Add the document to Firestore
     const docRef = await addDoc(noticiasCollectionRef, data);
 
     return new Response(

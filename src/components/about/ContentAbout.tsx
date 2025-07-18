@@ -15,7 +15,7 @@ export default function AnimatedAboutSection() {
         ease: [0, 0.71, 0.2, 1.01],
       }}
     >
-      <h1 className="text-white text-3xl md:text-4xl lg::text-6xl font-bold text-center lg:text-left w-full lg:w-2/5">
+      <h1 className="text-white text-3xl md:text-4xl lg:text-6xl font-bold text-center lg:text-left w-full lg:w-3/5 uppercase">
         Conheça a história da nossa Federação de Basquete
       </h1>
       <motion.div
@@ -29,7 +29,7 @@ export default function AnimatedAboutSection() {
           ease: "easeInOut",
         }}
       >
-        <ArrowBigDownDash color="white" size={40} />
+        <ArrowBigDownDash color="white" size={48} />
       </motion.div>
     </motion.div>
   );

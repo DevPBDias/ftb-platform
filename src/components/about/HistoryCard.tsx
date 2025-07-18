@@ -14,7 +14,8 @@ const HistoryCard = ({ data }: CardProps) => {
       } flex-col items-center justify-between w-full gap-16`}
     >
       <div className="flex flex-col items-start justify-start gap-4 w-full">
-        <h3 className="text-lg font-semibold">{data.year}</h3>
+        <h2 className="text-xl font-bold">{data.title}</h2>
+        <h3 className="text-base font-medium">{data.year}</h3>
         <p className="text-gray-700 text-balance text-justify">
           {data.description}
         </p>
