@@ -3,7 +3,7 @@
 import { PlusCircle } from "lucide-react";
 import InfoCard from "../Card/InfoCard";
 import Link from "next/link";
-import LoadingThreeDotsJumping from "@/app/loading";
+import LoadingThreeDotsJumping from "@/components/loading/LoadingBalls";
 import { useFetch } from "@/hooks/useFetch";
 import { CardData, ContainerNewsEventsProps } from "@/types/cards.types";
 

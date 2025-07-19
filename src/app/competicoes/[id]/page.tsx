@@ -8,7 +8,7 @@ import Link from "next/link";
 import * as motion from "motion/react-client";
 import { Instagram } from "lucide-react";
 import { formatDate } from "@/utils/formatterDate";
-import LoadingThreeDotsJumping from "@/app/loading";
+import LoadingThreeDotsJumping from "@/components/loading/LoadingBalls";
 import { useFetchById } from "@/hooks/useFecthById";
 import { CompeticaoData } from "@/types/competicao.types";
 

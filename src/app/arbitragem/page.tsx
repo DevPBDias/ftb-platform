@@ -5,7 +5,7 @@ import Navbar from "@/components/Hero/Navbar";
 import bg_referee from "@/assets/bg-referee.png";
 import Image from "next/image";
 import userPhoto from "@/assets/error-image.png";
-import LoadingThreeDotsJumping from "../loading";
+import LoadingThreeDotsJumping from "../../components/loading/LoadingBalls";
 import { useFetch } from "@/hooks/useFetch";
 import { Arbitro } from "@/types/referee.types";
 

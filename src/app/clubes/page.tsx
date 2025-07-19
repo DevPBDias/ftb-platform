@@ -5,7 +5,7 @@ import Navbar from "@/components/Hero/Navbar";
 import bg_teams from "@/assets/bg_teams.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import LoadingThreeDotsJumping from "../loading";
+import LoadingThreeDotsJumping from "../../components/loading/LoadingBalls";
 import { useFetch } from "@/hooks/useFetch";
 import { TeamData } from "@/types/teams";
 

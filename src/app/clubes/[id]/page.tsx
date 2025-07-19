@@ -10,7 +10,7 @@ import userImg from "@/assets/error-image.png";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import { Instagram } from "lucide-react";
-import LoadingThreeDotsJumping from "@/app/loading";
+import LoadingThreeDotsJumping from "@/components/loading/LoadingBalls";
 import { useFetchById } from "@/hooks/useFecthById";
 import { TeamData } from "@/types/teams";
 
@@ -41,7 +41,7 @@ export default function ClubeDetailPage() {
         </picture>
         <Navbar />
         <motion.div
-          className="absolute top-0 left-0 w-full flex flex-col items-start justify-center px-4 2xl:px-48 text-white gap-10 mt-40 bg-blue-950 2xl:bg-transparent py-8"
+          className="absolute top-0 left-0 w-full flex flex-col items-start justify-center px-[3%] 2xl:px-[11%] text-white gap-10 mt-40 bg-blue-950 xl:bg-transparent py-8"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, delay: 1, ease: [0, 0.71, 0.2, 1.01] }}
@@ -98,14 +98,16 @@ export default function ClubeDetailPage() {
                       />
                     ) : (
                       <Image
-                        src={avatar.image}
+                        src={avatar?.image}
                         alt="Coach"
                         className="w-full h-full object-cover rounded-lg"
                       />
                     )}
                   </picture>
-                  <p className="text-xs">{avatar.name}</p>
-                  <p className="text-xs">{avatar.role}</p>
+                  <div className="flex flex-col items-start justify-center text-center">
+                    <p className="text-sm">{avatar.name}</p>
+                    <p className="text-sm">{avatar.role}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -122,8 +124,8 @@ export default function ClubeDetailPage() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row w-full items-start justify-between gap-4 text-white">
-            <picture className="w-[300px] h-[300px] md:w-[600px] md:h-[400px] rounded-lg">
+          <div className="flex flex-col lg:flex-row w-full items-center lg:items-start justify-between gap-4 text-white">
+            <picture className="w-full h-[300px] md:w-[600px] md:h-[400px] rounded-lg">
               {typeof clube?.image === "string" ? (
                 <Image
                   src={clube.image}
@@ -151,7 +153,7 @@ export default function ClubeDetailPage() {
                 {clube?.championships?.map((tournament, index) => (
                   <div
                     key={index}
-                    className="flex flex-col items-center justify-center gap-2 border-2 border-white px-2 py-4 rounded-lg bg-blue-950/90"
+                    className="flex flex-col items-center justify-center h-36 gap-2 border-2 border-white px-2 py-4 rounded-lg bg-blue-950/90"
                   >
                     <p className="text-lg md:text-xl lg:text-2xl font-bold text-center w-full">
                       {tournament.quantity}
