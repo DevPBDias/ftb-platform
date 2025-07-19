@@ -7,6 +7,7 @@ import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 import MobileHeader from "@/components/header/MobileHeader";
 import { useEffect, useState } from "react";
+import LoadingThreeDotsJumping from "../loading";
 
 interface TeamData {
   logo?: StaticImageData | string;
@@ -53,9 +54,7 @@ const Teams = () => {
   }, []);
 
   if (loading) {
-    return (
-      <p className="text-center text-white text-lg">Carregando clubes...</p>
-    );
+    return <LoadingThreeDotsJumping />;
   }
 
   if (error) {

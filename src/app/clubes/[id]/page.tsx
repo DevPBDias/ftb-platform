@@ -12,6 +12,7 @@ import userImg from "@/assets/error-image.png";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import { Instagram } from "lucide-react";
+import LoadingThreeDotsJumping from "@/app/loading";
 
 interface TeamData {
   id: string;
@@ -65,9 +66,7 @@ export default function ClubeDetailPage() {
   }, [clubeId]);
 
   if (loading) {
-    return (
-      <p className="text-center text-white text-lg">Carregando clubes...</p>
-    );
+    return <LoadingThreeDotsJumping />;
   }
 
   if (error) {

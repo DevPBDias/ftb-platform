@@ -10,6 +10,7 @@ import Link from "next/link";
 import * as motion from "motion/react-client";
 import { Instagram } from "lucide-react";
 import { formatDate } from "@/utils/formatterDate";
+import LoadingThreeDotsJumping from "@/app/loading";
 
 interface noticiaData {
   id?: string;
@@ -49,11 +50,7 @@ export default function NoticiasDetailPage() {
   }, [noticiaId]);
 
   if (loading) {
-    return (
-      <p className="text-center text-white text-lg">
-        Carregando competicoes...
-      </p>
-    );
+    return <LoadingThreeDotsJumping />;
   }
 
   if (error) {

@@ -7,6 +7,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import MobileHeader from "@/components/header/MobileHeader";
 import userPhoto from "@/assets/error-image.png";
+import LoadingThreeDotsJumping from "../loading";
 
 interface Arbitro {
   id: string;
@@ -38,9 +39,7 @@ const RefereePage = () => {
   }, []);
 
   if (loading) {
-    return (
-      <p className="text-center text-white text-lg">Carregando árbitros...</p>
-    );
+    return <LoadingThreeDotsJumping />;
   }
 
   if (error) {

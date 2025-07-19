@@ -5,6 +5,7 @@ import { PlusCircle } from "lucide-react";
 import InfoCard from "../Card/InfoCard";
 import Link from "next/link";
 import { StaticImageData } from "next/image";
+import LoadingThreeDotsJumping from "@/app/loading";
 
 interface CardData {
   id?: string;
@@ -68,7 +69,7 @@ const ContainerNewsEvents = ({
       </header>
 
       {loading ? (
-        <p className="text-gray-500 italic">Carregando {type}...</p>
+        <LoadingThreeDotsJumping />
       ) : (
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-20 w-full">
           {cards.map((card, index) => (
