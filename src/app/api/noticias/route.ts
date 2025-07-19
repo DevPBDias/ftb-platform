@@ -5,18 +5,9 @@ import {
   orderBy,
   addDoc,
 } from "firebase/firestore";
-import { firestore } from "@/lib/firebase"; // Your Firebase instance
+import { firestore } from "@/lib/firebase";
 import { NextResponse } from "next/server";
-import { StaticImageData } from "next/image";
-
-interface Noticias {
-  id?: string;
-  titulo: string;
-  descricao: string;
-  datas: string[];
-  local: string;
-  image?: string | StaticImageData;
-}
+import { NoticiasResponse } from "@/types/news.types";
 
 export async function GET() {
   try {
@@ -31,9 +22,9 @@ export async function GET() {
     );
     const snapshot = await getDocs(q);
 
-    const noticias: Noticias[] = [];
+    const noticias: NoticiasResponse[] = [];
     snapshot.forEach((doc) => {
-      noticias.push({ id: doc.id, ...(doc.data() as Noticias) });
+      noticias.push({ id: doc.id, ...(doc.data() as NoticiasResponse) });
     });
 
     console.log(`Número de noticias encontradas: ${noticias.length}`);
@@ -54,16 +45,15 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json(); // Get the JSON body from the request
+    const data = await request.json();
     const noticiasCollectionRef = collection(firestore, "noticias");
 
-    // Add the document to Firestore
     const docRef = await addDoc(noticiasCollectionRef, data);
 
     return new Response(
       JSON.stringify({ id: docRef.id, message: "Noticia added successfully!" }),
       {
-        status: 201, // 201 Created
+        status: 201,
         headers: { "Content-Type": "application/json" },
       }
     );

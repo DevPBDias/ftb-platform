@@ -1,89 +1,32 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Navbar from "@/components/Hero/Navbar";
 import bg_teams from "@/assets/bg_teams.png";
 import teamPhoto from "@/assets/free_throws.png";
 import trophy from "@/assets/trophy.png";
-import MobileHeader from "@/components/header/MobileHeader";
 import userImg from "@/assets/error-image.png";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import { Instagram } from "lucide-react";
 import LoadingThreeDotsJumping from "@/app/loading";
-
-interface TeamData {
-  id: string;
-  teamName: string;
-  logo?: StaticImageData | string;
-  admins?: {
-    id: number;
-    name: string;
-    image: StaticImageData | string; // Imagem do admin pode ser local ou URL
-    role?: string;
-  }[];
-  image: StaticImageData | string; // Imagem principal do time
-  description: string;
-  championships?: {
-    // Campeonatos pode ser opcional
-    id: number;
-    name: string;
-    years: number[];
-    quantity: number;
-    category: string;
-  }[];
-  contact?: string; // Contato (ex: URL do Instagram)
-}
+import { useFetchById } from "@/hooks/useFecthById";
+import { TeamData } from "@/types/teams";
 
 export default function ClubeDetailPage() {
-  const route = useRouter(); // Descomente se for usar
-  const params = useParams(); // Obtém os parâmetros da URL
-  const clubeId = params.id as string; // O ID do clube da URL
-  const [clube, setClube] = useState<TeamData>();
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const route = useRouter();
+  const params = useParams();
+  const clubeId = params.id as string;
+  const {
+    data: clube,
+    loading,
+    error,
+  } = useFetchById<TeamData>("clubes", clubeId);
 
-  useEffect(() => {
-    async function fetchClubes() {
-      try {
-        const response = await fetch("/api/clubes");
-        const data: TeamData[] = await response.json();
-        const clubeData = data.find((team) => team.id === clubeId);
-        if (!clubeData) {
-          throw new Error("Clube não encontrado");
-        }
-        setClube(clubeData);
-      } catch (e) {
-        console.error("Erro ao buscar clubes:", e);
-        setError((e as Error).message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchClubes();
-  }, [clubeId]);
-
-  if (loading) {
-    return <LoadingThreeDotsJumping />;
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-red-100 text-red-700">
-        <p className="text-xl">Erro ao carregar clubes: {error}</p>
-      </div>
-    );
-  }
-
-  if (!clube) {
-    return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-100 text-gray-700 p-4">
-        <p className="text-xl">Clube não encontrado.</p>
-      </div>
-    );
-  }
+  if (loading) return <LoadingThreeDotsJumping />;
+  if (error) return <p className="text-red-500">Erro: {error}</p>;
+  if (!clube) return <p>Árbitro não encontrado.</p>;
 
   return (
     <main className="flex flex-col items-center justify-center w-full">
@@ -97,7 +40,6 @@ export default function ClubeDetailPage() {
           />
         </picture>
         <Navbar />
-        <MobileHeader />
         <motion.div
           className="absolute top-0 left-0 w-full flex flex-col items-start justify-center px-4 2xl:px-48 text-white gap-10 mt-40 bg-blue-950 2xl:bg-transparent py-8"
           initial={{ opacity: 0, scale: 0.5 }}
@@ -109,21 +51,20 @@ export default function ClubeDetailPage() {
               <h1 className="lg:text-5xl text-xl md:text-3xl">
                 {clube?.teamName}
               </h1>
-              {/* Ajuste para lidar com StaticImageData ou string */}
               {clube?.logo && typeof clube.logo === "string" ? (
                 <picture className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-lg bg-amber-500 hover:scale-105 transition-transform duration-300 ease-in-out">
                   <Image
                     src={clube.logo}
                     alt="Logo"
                     className="w-full h-full object-cover rounded-lg"
-                    width={128} // Definir largura e altura para otimização
+                    width={128}
                     height={128}
                     onError={(e) => {
                       e.currentTarget.src = `https://placehold.co/128x128/cccccc/333333?text=Logo`;
                     }}
                   />
                 </picture>
-              ) : clube?.logo ? ( // Se for StaticImageData
+              ) : clube?.logo ? (
                 <picture className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-lg bg-amber-500 hover:scale-105 transition-transform duration-300 ease-in-out">
                   <Image
                     src={clube.logo}
@@ -132,7 +73,6 @@ export default function ClubeDetailPage() {
                   />
                 </picture>
               ) : (
-                // Caso não haja logo
                 <p className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-lg flex items-center justify-center uppercase text-red-500 font-bold text-5xl border-2 border-white transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-white">
                   Sem Logo
                 </p>
@@ -145,7 +85,7 @@ export default function ClubeDetailPage() {
                   className="flex flex-row lg:flex-col items-center lg:items-start justify-center gap-2"
                 >
                   <picture className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-lg bg-amber-500 hover:scale-105 transition-transform duration-300 ease-in-out">
-                    {avatar.image === "error_img" || "" ? ( // Se a imagem do admin for string (URL)
+                    {avatar.image === "error_img" || "" ? (
                       <Image
                         src={userImg}
                         alt="Coach"
@@ -157,7 +97,6 @@ export default function ClubeDetailPage() {
                         }}
                       />
                     ) : (
-                      // Se a imagem do admin for StaticImageData
                       <Image
                         src={avatar.image}
                         alt="Coach"
@@ -185,19 +124,18 @@ export default function ClubeDetailPage() {
           </div>
           <div className="flex flex-col lg:flex-row w-full items-start justify-between gap-4 text-white">
             <picture className="w-[300px] h-[300px] md:w-[600px] md:h-[400px] rounded-lg">
-              {typeof clube?.image === "string" ? ( // Se a imagem principal for string (URL)
+              {typeof clube?.image === "string" ? (
                 <Image
                   src={clube.image}
                   alt="Team photo"
                   className="w-full h-full object-cover rounded-2xl hover:scale-105 transition-transform duration-300 ease-in-out"
-                  width={600} // Definir largura e altura para otimização
+                  width={600}
                   height={400}
                   onError={(e) => {
                     e.currentTarget.src = `https://placehold.co/600x400/cccccc/333333?text=Foto+Time`;
                   }}
                 />
               ) : (
-                // Se a imagem principal for StaticImageData
                 <Image
                   src={clube?.image || teamPhoto}
                   alt="Team photo"

@@ -23,13 +23,13 @@ function LoadingThreeDotsJumping() {
       transition={{ staggerChildren: -0.2, staggerDirection: -1 }}
       className="fixed inset-0 flex flex-col justify-center items-center gap-4 pointer-events-none z-50 bg-blue-950"
     >
-      <div className="flex flex-row items-center">
+      <div className="flex flex-row items-center justify-center gap-3">
         <motion.div variants={ballVariants} className="will-change-transform">
           <Image
             src={basketballIcon}
             alt="Basketball"
-            width={40}
-            height={40}
+            width={32}
+            height={32}
             className="drop-shadow-lg"
           />
         </motion.div>
@@ -37,8 +37,8 @@ function LoadingThreeDotsJumping() {
           <Image
             src={basketballIcon}
             alt="Basketball"
-            width={40}
-            height={40}
+            width={32}
+            height={32}
             className="drop-shadow-lg"
           />
         </motion.div>
@@ -46,8 +46,8 @@ function LoadingThreeDotsJumping() {
           <Image
             src={basketballIcon}
             alt="Basketball"
-            width={40}
-            height={40}
+            width={32}
+            height={32}
             className="drop-shadow-lg"
           />
         </motion.div>

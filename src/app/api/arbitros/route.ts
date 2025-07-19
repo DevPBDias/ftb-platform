@@ -7,14 +7,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { firestore } from "../../../lib/firebase";
-
-interface Arbitro {
-  id?: string;
-  name: string;
-  experience: string;
-  years: number;
-  photo: string;
-}
+import { ArbitroFetchResponse } from "@/types/referee.types";
 
 export async function GET() {
   try {
@@ -29,9 +22,9 @@ export async function GET() {
     );
     const snapshot = await getDocs(q);
 
-    const arbitros: Arbitro[] = [];
+    const arbitros: ArbitroFetchResponse[] = [];
     snapshot.forEach((doc) => {
-      arbitros.push({ id: doc.id, ...(doc.data() as Arbitro) });
+      arbitros.push({ id: doc.id, ...(doc.data() as ArbitroFetchResponse) });
     });
 
     console.log(`Número de arbitros encontradas: ${arbitros.length}`);
@@ -52,7 +45,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json(); // Get the JSON body from the request
+    const data = await request.json();
     const arbitrosCollectionRef = collection(firestore, "arbitros");
 
     const docRef = await addDoc(arbitrosCollectionRef, data);
@@ -63,7 +56,7 @@ export async function POST(request: Request) {
         message: "Arbitro added successfully!",
       }),
       {
-        status: 201, // 201 Created
+        status: 201,
         headers: { "Content-Type": "application/json" },
       }
     );

@@ -20,7 +20,7 @@ export default function AnimatedAboutSection() {
       </h1>
       <motion.div
         animate={{
-          y: [0, -30, 0], // Moves up 30px then back
+          y: [0, -30, 0],
         }}
         transition={{
           duration: 1,

@@ -1,29 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { PlusCircle } from "lucide-react";
 import InfoCard from "../Card/InfoCard";
 import Link from "next/link";
-import { StaticImageData } from "next/image";
 import LoadingThreeDotsJumping from "@/app/loading";
-
-interface CardData {
-  id?: string;
-  titulo: string;
-  descricao: string;
-  datas: string[];
-  local: string;
-  image?: string | StaticImageData | undefined;
-}
-
-interface ContainerNewsEventsProps {
-  title: string;
-  btnName: string;
-  type: "noticias" | "competicoes";
-  className?: string;
-  turnOffBtn?: boolean;
-  turnOffTitle?: boolean;
-}
+import { useFetch } from "@/hooks/useFetch";
+import { CardData, ContainerNewsEventsProps } from "@/types/cards.types";
 
 const ContainerNewsEvents = ({
   title,
@@ -33,23 +15,12 @@ const ContainerNewsEvents = ({
   turnOffTitle,
   turnOffBtn,
 }: ContainerNewsEventsProps) => {
-  const [cards, setCards] = useState<CardData[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: cards, loading, error } = useFetch<CardData[]>(`/api/${type}`);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`/api/${type}`);
-        const data = await res.json();
-        setCards(data);
-      } catch (err) {
-        console.error(`Erro ao buscar ${type}:`, err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [type]);
+  if (loading) return <LoadingThreeDotsJumping />;
+  if (error) return <p className="text-red-500">Erro: {error}</p>;
+  if (!cards || cards.length === 0)
+    return <p className="text-white">Nenhum clube encontrado.</p>;
 
   return (
     <section
@@ -80,13 +51,23 @@ const ContainerNewsEvents = ({
       {cards.length === 0 && !loading && (
         <p className="text-gray-500 italic">Nenhum {type} encontrado.</p>
       )}
-      <Link
-        href={`/${type}`}
-        className="flex items-center mt-4 gap-2 bg-yellow-500 rounded-lg py-3 w-full lg:hidden justify-center hover:bg-yellow-600 hover:scale-105 transition-all duration-300 ease-in-out shadow-lg"
-      >
-        <PlusCircle size={18} color="#010030" />
-        <p className="font-bold text-lg">{btnName}</p>
-      </Link>
+      {!turnOffBtn && (
+        <Link
+          href={`/${type}`}
+          className="flex items-center mt-4 gap-2 bg-yellow-500 rounded-lg py-3 w-full lg:hidden justify-center hover:bg-yellow-600 hover:scale-105 transition-all duration-300 ease-in-out shadow-lg"
+        >
+          <PlusCircle size={18} color="#010030" />
+          <p className="font-bold text-lg">{btnName}</p>
+        </Link>
+      )}
+      {turnOffBtn && (
+        <Link
+          href={`/`}
+          className="flex items-center mt-4 gap-2 bg-yellow-500 rounded-lg py-3 w-full lg:hidden justify-center hover:bg-yellow-600 hover:scale-105 transition-all duration-300 ease-in-out shadow-lg"
+        >
+          <p className="font-bold text-lg">Voltar</p>
+        </Link>
+      )}
     </section>
   );
 };

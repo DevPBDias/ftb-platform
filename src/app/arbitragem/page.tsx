@@ -4,51 +4,22 @@ import * as motion from "motion/react-client";
 import Navbar from "@/components/Hero/Navbar";
 import bg_referee from "@/assets/bg-referee.png";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import MobileHeader from "@/components/header/MobileHeader";
 import userPhoto from "@/assets/error-image.png";
 import LoadingThreeDotsJumping from "../loading";
-
-interface Arbitro {
-  id: string;
-  name: string;
-  experience: string;
-  years: number;
-  photo: string;
-}
+import { useFetch } from "@/hooks/useFetch";
+import { Arbitro } from "@/types/referee.types";
 
 const RefereePage = () => {
-  const [arbitros, setArbitros] = useState<Arbitro[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    data: arbitros,
+    loading,
+    error,
+  } = useFetch<Arbitro[]>("/api/arbitros");
 
-  useEffect(() => {
-    async function fetchArbitros() {
-      try {
-        const response = await fetch("/api/arbitros"); // Nova rota da API
-        const data: Arbitro[] = await response.json();
-        setArbitros(data);
-      } catch (e) {
-        console.error("Erro ao buscar árbitros:", e);
-        setError((e as Error).message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchArbitros();
-  }, []);
-
-  if (loading) {
-    return <LoadingThreeDotsJumping />;
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-red-100 text-red-700">
-        <p className="text-xl">Erro ao carregar árbitros: {error}</p>
-      </div>
-    );
-  }
+  if (loading) return <LoadingThreeDotsJumping />;
+  if (error) return <p className="text-red-500">Erro: {error}</p>;
+  if (!arbitros || arbitros.length === 0)
+    return <p className="text-white">Nenhum árbitro encontrado.</p>;
 
   return (
     <main className="flex flex-col items-center justify-center w-full">
@@ -62,7 +33,6 @@ const RefereePage = () => {
           />
         </picture>
         <Navbar />
-        <MobileHeader />
         <motion.div
           className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-[3%] lg:px-[8%] 2xl:px-[8%] gap-6"
           initial={{ opacity: 0, scale: 0.5 }}
@@ -78,12 +48,12 @@ const RefereePage = () => {
               Quem faz as regras valerem dentro de quadra
             </h1>
             <div className="flex flex-wrap flex-row gap-2 2xl:gap-4 items-center justify-center w-full">
-              {arbitros.length === 0 ? (
+              {arbitros?.length === 0 ? (
                 <p className="text-center text-white text-lg">
                   Nenhum árbitro encontrado no banco de dados.
                 </p>
               ) : (
-                arbitros.map((item) => (
+                arbitros?.map((item) => (
                   <picture
                     key={item.id}
                     className="relative w-[108px] h-[108px] md:w-40 md:h-40 2xl:w-52 2xl:h-60 rounded-lg hover:scale-105 transition-transform duration-300"

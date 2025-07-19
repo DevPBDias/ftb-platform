@@ -4,11 +4,12 @@ import { ISocialMedia, socialMedia } from "@/constants/socialMediaLinks";
 import Link from "next/link";
 import logoFTB from "@/assets/logo_ftb.png";
 import Image from "next/image";
+import MobileHeader from "../header/MobileHeader";
 
 const Navbar = () => {
   return (
     <motion.div
-      className="absolute top-0 left-0 z-10 w-full flex items-center justify-between px-4 2xl:px-48 py-4"
+      className="absolute top-0 left-0 z-10 w-full flex items-center justify-between px-4 2xl:px-48 py-4 bg-blue-950/70"
       initial={{ opacity: 0, scale: 0.3 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{

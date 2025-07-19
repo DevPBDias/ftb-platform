@@ -6,16 +6,8 @@ import {
   orderBy,
   addDoc,
 } from "firebase/firestore";
-import { firestore } from "../../../lib/firebase"; // Importa a instância do Firestore do seu lib/firebase.ts
-
-interface Competicao {
-  id?: string; // O ID do documento Firestore
-  titulo: string; // Título da competição
-  datas: string[]; // Array de datas da competição (como strings)
-  descricao: string; // Descrição da competição
-  local: string; // Local da competição
-  image: string; // URL da imagem da competição
-}
+import { firestore } from "../../../lib/firebase";
+import { CompeticaoData } from "@/types/competicao.types";
 
 export async function GET() {
   try {
@@ -30,9 +22,9 @@ export async function GET() {
     );
     const snapshot = await getDocs(q);
 
-    const competicoes: Competicao[] = [];
+    const competicoes: CompeticaoData[] = [];
     snapshot.forEach((doc) => {
-      competicoes.push({ id: doc.id, ...(doc.data() as Competicao) });
+      competicoes.push({ id: doc.id, ...(doc.data() as CompeticaoData) });
     });
 
     console.log(`Número de competições encontradas: ${competicoes.length}`);
@@ -56,7 +48,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json(); // Get the JSON body from the request
+    const data = await request.json();
     const competicoesCollectionRef = collection(firestore, "competicoes");
 
     const docRef = await addDoc(competicoesCollectionRef, data);
@@ -67,7 +59,7 @@ export async function POST(request: Request) {
         message: "Competicao added successfully!",
       }),
       {
-        status: 201, // 201 Created
+        status: 201,
         headers: { "Content-Type": "application/json" },
       }
     );

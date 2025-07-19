@@ -7,29 +7,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { firestore } from "../../../lib/firebase";
-import { StaticImageData } from "next/image";
-
-interface TeamData {
-  logo?: StaticImageData | string;
-  id?: string;
-  teamName: string;
-  admins: {
-    id: number;
-    name: string;
-    image: StaticImageData;
-    role?: string;
-  }[];
-  image: StaticImageData;
-  description: string;
-  championships?: {
-    id: number;
-    name: string;
-    years: number[];
-    quantity: number;
-    category: string;
-  }[];
-  contact?: string;
-}
+import { TeamData } from "@/types/teams";
 
 export async function GET() {
   try {
@@ -67,7 +45,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json(); // Get the JSON body from the request
+    const data = await request.json();
     const clubesCollectionRef = collection(firestore, "clubes");
 
     const docRef = await addDoc(clubesCollectionRef, data);
@@ -78,7 +56,7 @@ export async function POST(request: Request) {
         message: "Clube added successfully!",
       }),
       {
-        status: 201, // 201 Created
+        status: 201,
         headers: { "Content-Type": "application/json" },
       }
     );

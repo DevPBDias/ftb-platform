@@ -32,7 +32,7 @@ export default function AnimatedHeroSection() {
       <motion.div
         className="lg:hidden md:-mt-40"
         animate={{
-          y: [0, -30, 0], // Moves up 30px then back
+          y: [0, -30, 0],
         }}
         transition={{
           duration: 5,
