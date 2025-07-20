@@ -1,193 +1,365 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
-import Image from "next/image";
 import Navbar from "@/components/Hero/Navbar";
 import bg_teams from "@/assets/bg_teams.png";
 import teamPhoto from "@/assets/free_throws.png";
 import trophy from "@/assets/trophy.png";
 import userImg from "@/assets/error-image.png";
+import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import * as motion from "motion/react-client";
-import { Instagram } from "lucide-react";
+import {
+  Instagram,
+  ArrowLeft,
+  Trophy,
+  Users,
+  Calendar,
+  MapPin,
+  Star,
+  Award,
+  Phone,
+  Mail,
+  ExternalLink,
+} from "lucide-react";
 import LoadingThreeDotsJumping from "@/components/loading/LoadingBalls";
 import { useFetchById } from "@/hooks/useFecthById";
 import { TeamData } from "@/types/teams";
+import ModernNavbar from "@/components/Hero/Navbar";
 
 export default function ClubeDetailPage() {
   const route = useRouter();
   const params = useParams();
   const clubeId = params.id as string;
   const {
-    data: clube,
+    data: team,
     loading,
     error,
   } = useFetchById<TeamData>("clubes", clubeId);
 
   if (loading) return <LoadingThreeDotsJumping />;
   if (error) return <p className="text-red-500">Erro: {error}</p>;
-  if (!clube) return <p>Árbitro não encontrado.</p>;
+  if (!team) return <p>Árbitro não encontrado.</p>;
 
   return (
-    <main className="flex flex-col items-center justify-center w-full">
-      <section className="relative w-full lg:h-[100dvh] flex flex-col items-center justify-center">
-        <picture className="w-full h-full ">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <section className="relative min-h-screen overflow-hidden">
+        <ModernNavbar />
+        <div className="absolute inset-0">
           <Image
             src={bg_teams}
-            alt="Image of a player holding a basketball in the middle of a park"
-            className="w-full h-full object-cover"
+            alt="Basketball court background"
+            fill
+            className="object-cover"
             priority
           />
-        </picture>
-        <Navbar />
-        <motion.div
-          className="absolute top-0 left-0 w-full flex flex-col items-start justify-center px-[3%] 2xl:px-[11%] text-white gap-10 mt-40 bg-blue-950 xl:bg-transparent py-8"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, delay: 1, ease: [0, 0.71, 0.2, 1.01] }}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#162456]/40 via-[#162456]/20 to-blue-900/60" />
+        </div>
+
+        {/* Navigation */}
+        <motion.nav
+          className="relative p-6 2xl:absolute z-20 2xl:top-32 2xl:left-40"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="flex flex-col xl:flex-row items-start justify-between w-full gap-4 text-white">
-            <div className="flex flex-row-reverse items-center justify-center gap-6">
-              <h1 className="lg:text-5xl text-xl md:text-3xl">
-                {clube?.teamName}
-              </h1>
-              {clube?.logo && typeof clube.logo === "string" ? (
-                <picture className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-lg bg-amber-500 hover:scale-105 transition-transform duration-300 ease-in-out">
-                  <Image
-                    src={clube.logo}
-                    alt="Logo"
-                    className="w-full h-full object-cover rounded-lg"
-                    width={128}
-                    height={128}
-                    onError={(e) => {
-                      e.currentTarget.src = `https://placehold.co/128x128/cccccc/333333?text=Logo`;
-                    }}
-                  />
-                </picture>
-              ) : clube?.logo ? (
-                <picture className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-lg bg-amber-500 hover:scale-105 transition-transform duration-300 ease-in-out">
-                  <Image
-                    src={clube.logo}
-                    alt="Logo"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                </picture>
-              ) : (
-                <p className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-lg flex items-center justify-center uppercase text-red-500 font-bold text-5xl border-2 border-white transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-white">
-                  Sem Logo
-                </p>
-              )}
-            </div>
-            <div className="flex flex-row flex-wrap items-start md:items-center justify-between gap-4">
-              {clube?.admins?.map((avatar, index) => (
-                <div
-                  key={index}
-                  className="flex flex-row lg:flex-col items-center lg:items-start justify-center gap-2"
+          <button
+            onClick={() => route.push("/clubes")}
+            className="cursor-pointer group inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-medium px-4 py-2 rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300"
+          >
+            <ArrowLeft
+              size={18}
+              className="transition-transform duration-300 group-hover:-translate-x-1"
+            />
+            <span>Voltar para clubes</span>
+          </button>
+        </motion.nav>
+
+        {/* Hero Content */}
+        <div className="relative z-10 container mx-auto px-4 py-8 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[80vh]">
+            {/* Team Info */}
+            <motion.div
+              className="space-y-8"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              {/* Team Header */}
+              <div className="flex items-center gap-6">
+                <motion.div
+                  className="relative"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <picture className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-lg bg-amber-500 hover:scale-105 transition-transform duration-300 ease-in-out">
-                    {avatar.image === "error_img" || "" ? (
-                      <Image
-                        src={userImg}
-                        alt="Coach"
-                        className="w-full h-full object-cover rounded-lg"
-                        width={128}
-                        height={128}
-                        onError={(e) => {
-                          e.currentTarget.src = `https://placehold.co/128x128/cccccc/333333?text=Admin`;
-                        }}
-                      />
-                    ) : (
-                      <Image
-                        src={avatar?.image}
-                        alt="Coach"
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    )}
-                  </picture>
-                  <div className="flex flex-col items-start justify-center text-center">
-                    <p className="text-sm">{avatar.name}</p>
-                    <p className="text-sm">{avatar.role}</p>
+                  <div className="w-20 h-20 lg:w-32 lg:h-32 rounded-2xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                    <Image
+                      src={team.logo || "/placeholder.svg"}
+                      alt={`Logo ${team.teamName}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                    <Star size={16} className="text-black" />
+                  </div>
+                </motion.div>
+
+                <div className="flex-1">
+                  <h1 className="text-3xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-2">
+                    {team.teamName}
+                  </h1>
+                  <div className="flex flex-wrap items-center gap-4 text-white/80">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={16} />
+                      <span>Fundado em {team.founded}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin size={16} />
+                      <span>{team.location ?? "Localização desconhecida"}</span>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-            <div className="flex flex-row items-center justify-center w-full md:w-fit 2xl:w-80 gap-3 bg-white p-6 rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out">
-              <picture className=" w-16 h-16 lg:w-24 lg:h-24 rounded-lg bg-amber-500">
-                <Image
-                  src={trophy}
-                  alt="Trophy"
-                  className="w-full h-full object-cover"
-                />
-              </picture>
-              <p className="uppercase text-sm lg:text-lg w-full lg:w-32 font-bold text-blue-950">
-                Campeão Tocantinense 2025
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col lg:flex-row w-full items-center lg:items-start justify-between gap-4 text-white">
-            <picture className="w-full h-[300px] md:w-[600px] md:h-[400px] rounded-lg">
-              {typeof clube?.image === "string" ? (
-                <Image
-                  src={clube.image}
-                  alt="Team photo"
-                  className="w-full h-full object-cover rounded-2xl hover:scale-105 transition-transform duration-300 ease-in-out"
-                  width={600}
-                  height={400}
-                  onError={(e) => {
-                    e.currentTarget.src = `https://placehold.co/600x400/cccccc/333333?text=Foto+Time`;
-                  }}
-                />
-              ) : (
-                <Image
-                  src={clube?.image || teamPhoto}
-                  alt="Team photo"
-                  className="w-full h-full object-cover rounded-2xl hover:scale-105 transition-transform duration-300 ease-in-out"
-                />
-              )}
-            </picture>
-            <div className="w-full lg:w-1/2 flex flex-col items-start justify-center gap-9">
-              <p className="w-full text-sm md:text-base font-normal text-justify">
-                {clube?.description}
-              </p>
-              <div className="w-full grid grid-cols-2 lg:grid-cols-3 items-center justify-center gap-6 font-bold">
-                {clube?.championships?.map((tournament, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center justify-center h-36 gap-2 border-2 border-white px-2 py-4 rounded-lg bg-blue-950/90"
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4">
+                {[
+                  {
+                    label: "Jogadores",
+                    value: team.stats?.players ?? 0,
+                    icon: Users,
+                  },
+                  {
+                    label: "Vitórias",
+                    value: team.stats?.victories ?? 0,
+                    icon: Trophy,
+                  },
+                  {
+                    label: "Anos",
+                    value: team.stats?.founded ?? team.founded ?? "N/A",
+                    icon: Award,
+                  },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/20"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                    whileHover={{ y: -4 }}
                   >
-                    <p className="text-lg md:text-xl lg:text-2xl font-bold text-center w-full">
-                      {tournament.quantity}
-                    </p>
-                    <p className="text-base text-center w-full font-medium text-gray-300">
-                      {tournament.name}
-                    </p>
-                    <p className="text-sm text-center w-full font-medium text-gray-300">
-                      {tournament.category}
-                    </p>
-                  </div>
+                    <stat.icon
+                      size={24}
+                      className="text-yellow-400 mx-auto mb-2"
+                    />
+                    <div className="text-2xl font-bold text-white">
+                      {stat.value}
+                    </div>
+                    <div className="text-sm text-white/60">{stat.label}</div>
+                  </motion.div>
                 ))}
               </div>
-              <div className="flex flex-row items-center justify-between gap-4 w-full">
-                <Link
-                  href={clube?.contact || ""}
-                  target="_blank"
-                  className="hover:scale-110 cursor-pointer transition duration-200 flex items-center justify-center gap-2 p-2 border border-white rounded-lg"
-                >
-                  <Instagram size={20} color="white" />
-                  <span className="md:inline-block text-white font-bold">
-                    Instagram
-                  </span>
-                </Link>
-                <button
-                  onClick={() => route.push(`/clubes`)}
-                  className="flex items-center justify-center text-sm md:text-base gap-3 px-6 py-3 bg-transparent border border-white text-white rounded-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer font-bold"
-                >
-                  Voltar para clubes
-                </button>
+
+              {/* Championship Badge */}
+              <motion.div
+                className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-6 text-black"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="flex items-center gap-4">
+                  <Trophy size={32} />
+                  <div>
+                    <h3 className="text-xl font-bold">Campeão Tocantinense</h3>
+                    <p className="text-black/80">Temporada 2024</p>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Team Photo */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <div className="relative h-[400px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl">
+                <Image
+                  src={team.image || "/placeholder.svg"}
+                  alt="Team photo"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
+
+              {/* Floating Elements */}
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#162456] to-blue-600 rounded-xl flex items-center justify-center">
+                    <Users size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-[#162456]">
+                      {team.stats?.players ?? 0}
+                    </div>
+                    <div className="text-sm text-slate-600">Atletas</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Content Section */}
+      <section className="relative z-10 bg-white py-16 lg:py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16">
+            {/* Main Content */}
+            <div className="lg:col-span-2 space-y-12">
+              {/* About */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl font-bold text-[#162456] mb-6 flex items-center gap-3">
+                  <div className="w-1 h-8 bg-gradient-to-b from-[#162456] to-blue-600 rounded-full" />
+                  Sobre o Time
+                </h2>
+                <p className="text-slate-600 leading-relaxed text-lg">
+                  {team.description}
+                </p>
+              </motion.div>
+
+              {/* Championships */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl font-bold text-[#162456] mb-8 flex items-center gap-3">
+                  <div className="w-1 h-8 bg-gradient-to-b from-yellow-400 to-orange-500 rounded-full" />
+                  Conquistas
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {team.championships?.map((championship, index) => (
+                    <motion.div
+                      key={index}
+                      className="group bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200/50"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      whileHover={{ y: -4 }}
+                    >
+                      <div className="text-center">
+                        <div className="w-16 h-16 bg-gradient-to-r from-[#162456] to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                          <Trophy size={24} className="text-white" />
+                        </div>
+                        <div className="text-3xl font-bold text-[#162456] mb-2">
+                          {championship.quantity}
+                        </div>
+                        <div className="font-semibold text-slate-800 mb-1">
+                          {championship.name}
+                        </div>
+                        <div className="text-sm text-slate-600">
+                          {championship.category}
+                        </div>
+                        <div className="text-xs text-slate-500 mt-2">
+                          {championship.years?.join(", ") ?? ""}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-8">
+              {/* Staff */}
+              <motion.div
+                className="bg-gradient-to-br from-slate-50 to-white rounded-3xl p-8 shadow-lg border border-slate-200/50"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="text-2xl font-bold text-[#162456] mb-6 flex items-center gap-2">
+                  <Users size={24} />
+                  Comissão Técnica
+                </h3>
+                <div className="space-y-6">
+                  {team.admins?.map((admin, index) => (
+                    <motion.div
+                      key={index}
+                      className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300"
+                      whileHover={{ x: 4 }}
+                    >
+                      <div className="relative">
+                        <div className="w-16 h-16 rounded-2xl overflow-hidden bg-slate-200">
+                          <Image
+                            src={
+                              admin.image === "error_img"
+                                ? userImg
+                                : admin.image || "/placeholder.svg"
+                            }
+                            alt={admin.name}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-slate-800">
+                          {admin.name}
+                        </h4>
+                        <p className="text-sm text-slate-600">{admin.role}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Contact */}
+              <motion.div
+                className="bg-gradient-to-br from-[#162456] to-blue-600 rounded-3xl p-8 text-white shadow-lg"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                  <Phone size={24} />
+                  Contato
+                </h3>
+                <div className="space-y-4">
+                  <Link
+                    href={team.contact || "#"}
+                    target="_blank"
+                    className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-2xl p-4 transition-all duration-300 hover:scale-105"
+                  >
+                    <Instagram size={20} />
+                    <span className="font-medium">Instagram</span>
+                    <ExternalLink
+                      size={16}
+                      className="ml-auto opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </Link>
+                </div>
+              </motion.div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
     </main>
   );

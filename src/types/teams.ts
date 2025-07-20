@@ -1,23 +1,28 @@
-import { StaticImageData } from "next/image";
-
+// ...existing code...
 export interface TeamData {
-  id?: string;
+  id: string;
   teamName: string;
-  logo?: StaticImageData | string;
-  admins?: {
+  logo?: string;
+  image?: string;
+  founded?: string | number;
+  description?: string;
+  location?: string; //
+  stats?: {
+    players?: number;
+    victories?: number;
+    founded?: number;
+  };
+  championships?: Array<{
     id: number;
     name: string;
-    image: StaticImageData | string;
-    role?: string;
-  }[];
-  image: StaticImageData | string;
-  description: string;
-  championships?: {
-    id: number;
-    name: string;
-    years: number[];
+    years?: number[];
     quantity: number;
     category: string;
-  }[];
+  }>;
+  admins?: Array<{
+    name: string;
+    role: string;
+    image?: string;
+  }>;
   contact?: string;
 }
