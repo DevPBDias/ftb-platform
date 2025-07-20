@@ -25,7 +25,8 @@ const Teams = () => {
           <Image
             src={bg_teams}
             alt="Image of a player holding a basketball in the middle of a park"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover -z-10"
           />
         </picture>
         <Navbar />

@@ -1,9 +1,6 @@
 "use client";
 
-import Navbar from "@/components/Hero/Navbar";
 import bg_teams from "@/assets/bg_teams.png";
-import teamPhoto from "@/assets/free_throws.png";
-import trophy from "@/assets/trophy.png";
 import userImg from "@/assets/error-image.png";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";

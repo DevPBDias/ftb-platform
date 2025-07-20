@@ -23,13 +23,13 @@ const RefereePage = () => {
 
   return (
     <main className="flex flex-col items-center justify-center w-full">
-      <section className="relative w-full h-[100dvh] flex flex-col items-center justify-center">
+      <section className="relative w-full h-dvh flex flex-col items-center justify-center">
         <picture className="w-full h-full">
           <Image
             src={bg_referee}
             alt="Image of a player holding a basketball in the middle of a park"
-            className="w-full h-full object-cover"
-            priority
+            fill
+            className="object-cover -z-10"
           />
         </picture>
         <Navbar />
