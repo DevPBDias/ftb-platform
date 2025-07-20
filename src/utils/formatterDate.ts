@@ -1,6 +1,14 @@
-export function formatDate(date: string): string {
-  const parsedDate = new Date(date);
-  const day = String(parsedDate.getDate()).padStart(2, "0");
-  const month = String(parsedDate.getMonth() + 1).padStart(2, "0");
-  return `${day}/${month}`;
+export function formatDate(dateString: string): string {
+  if (!dateString) return "Data a definir";
+
+  try {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  } catch (error) {
+    return "Data inválida";
+  }
 }

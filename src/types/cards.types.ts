@@ -17,3 +17,16 @@ export interface ContainerNewsEventsProps {
   turnOffBtn?: boolean;
   turnOffTitle?: boolean;
 }
+
+export interface InfoCardProps {
+  data: {
+    id?: string;
+    titulo: string;
+    descricao: string;
+    datas: string[];
+    local: string;
+    image?: string | StaticImageData;
+  };
+  type?: "noticias" | "competicoes";
+  index?: number;
+}
