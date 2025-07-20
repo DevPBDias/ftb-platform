@@ -24,7 +24,7 @@ export async function GET() {
 
     const clubes: TeamData[] = [];
     snapshot.forEach((doc) => {
-      clubes.push({ id: doc.id, ...(doc.data() as TeamData) });
+      clubes.push({ ...(doc.data() as TeamData) });
     });
 
     console.log(`Número de clubes encontrados: ${clubes.length}`);
