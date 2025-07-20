@@ -17,15 +17,18 @@ export default function AnimatedHeroSection() {
       }}
     >
       <div className="flex flex-col items-start md:items-center lg:items-start justify-center w-full md:w-4/5 lg:w-[45%] h-full gap-4">
-        <h1 className="text-white text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold md:text-center lg:text-left">
-          Welcome to the Ultimate Basketball Experience
+        <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold md:text-center lg:text-left text-balance">
+          Promovendo o basquete{" "}
+          <span className="text-yellow-500 uppercase">Tocantinense</span> desde
+          a base
         </h1>
-        <p className="text-white/80 text-sm lg:text-xl max-w-2xl font-normal w-full md:text-center md:w-3/5 lg:text-left lg:w-[80%]">
-          Join us for an unforgettable journey through the world of basketball,
-          where passion meets excellence.
+        <p className="text-white text-sm lg:text-xl font-normal w-full md:text-center md:w-3/5 lg:text-left lg:w-full text-balance">
+          Com responsabilidade, paixão e olho no futuro de cada jovem atleta.
+          Aqui, o basquete vai além do jogo: é crescimento, é comunidade, é
+          transformação.
         </p>
-        <button className="w-full md:w-3/5 xl:w-80 mt-6 px-6 py-2.5 bg-yellow-500 text-blue-950 rounded-lg hover:bg-yellow-700 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer font-bold">
-          Saiba mais
+        <button className="w-full md:w-3/5 xl:w-60 mt-6 px-6 py-2.5 bg-yellow-500 text-black rounded-lg hover:bg-yellow-700 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer font-bold">
+          Quero saber mais
         </button>
       </div>
       <Schedule />

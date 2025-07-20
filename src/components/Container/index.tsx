@@ -31,7 +31,7 @@ const ContainerNewsEvents = ({
         {!turnOffBtn && (
           <Link
             href={`/${type}`}
-            className="lg:flex items-center gap-2 bg-yellow-500 rounded-lg py-3 hidden w-36 justify-center hover:bg-yellow-600 hover:scale-105 transition-all duration-300 ease-in-out shadow-lg"
+            className="lg:flex items-center gap-2 bg-yellow-500 rounded-lg px-4 py-3 hidden min-w-44 justify-center hover:bg-yellow-600 hover:scale-105 transition-all duration-300 ease-in-out shadow-lg"
           >
             <PlusCircle size={18} color="#010030" />
             <p className="font-bold text-lg">{btnName}</p>
