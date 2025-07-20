@@ -7,8 +7,9 @@ export interface ISocialMedia {
   name: string;
   link: string;
   icon: React.ComponentType<{
-    color: string;
+    color?: string;
     size: number;
+    className?: string;
   }>;
 }
 
