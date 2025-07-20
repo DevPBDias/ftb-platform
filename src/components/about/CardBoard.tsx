@@ -5,7 +5,7 @@ import ProfessionalCard from "./ProfessionalCard";
 const CardBoard = () => {
   return (
     <motion.div
-      className="absolute -bottom-3/6 left-0 w-full flex flex-col items-start justify-center p-9 gap-9 rounded-lg px-4 2xl:px-48"
+      className="absolute -bottom-3/6 left-0 w-full flex flex-col items-start justify-center p-9 gap-9 rounded-lg px-[5%] 2xl:px-[10%]"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{

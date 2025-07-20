@@ -7,7 +7,7 @@ import { ArrowBigDownDash } from "lucide-react";
 export default function AnimatedHeroSection() {
   return (
     <motion.div
-      className="absolute top-0 left-0 w-full h-dvh flex flex-col lg:flex-row items-center justify-center lg:justify-between px-4 2xl:px-48 -mt-10 lg:-mt-0"
+      className="absolute top-0 left-0 w-full h-dvh flex flex-col lg:flex-row items-center justify-center lg:justify-between px-[5%] 2xl:px-[10%] -mt-10 lg:-mt-0"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{

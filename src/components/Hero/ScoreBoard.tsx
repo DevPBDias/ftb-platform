@@ -5,7 +5,7 @@ import ScoreBoardCard from "../Card/ScoreBoardCards";
 const ScoreBoard = () => {
   return (
     <motion.div
-      className="absolute -bottom-52 left-0 w-full hidden lg:flex flex-col items-start justify-center p-4 gap-9 rounded-lg 2xl:px-48"
+      className="absolute -bottom-52 left-0 w-full hidden lg:flex flex-col items-start justify-center p-4 gap-9 rounded-lg px-[5%] 2xl:px-[10%]"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{

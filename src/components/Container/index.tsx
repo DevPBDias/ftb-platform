@@ -24,7 +24,7 @@ const ContainerNewsEvents = ({
 
   return (
     <section
-      className={`${className} flex flex-col items-start justify-start gap-4 w-full p-4 2xl:px-[10%] mb-16`}
+      className={`${className} flex flex-col items-start justify-start gap-4 w-full px-[5%] 2xl:px-[10%] mb-16`}
     >
       <header className="flex flex-col lg:flex-row items-start gap-4 lg:items-center justify-start lg:justify-between w-full mb-4">
         <div className="text-2xl md:text-3xl font-bold text-[#162456] flex items-center gap-3">
