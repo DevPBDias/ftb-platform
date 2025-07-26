@@ -1,10 +1,11 @@
 "use client";
 
-import { Calendar, Clock, Trash2 } from "lucide-react";
+import { Calendar, Clock, Trash2, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CalendarGame } from "@/types/teams";
+import { formatDateWithDayName } from "@/utils/formatterDate";
 
 interface GameCardProps {
   game: CalendarGame;
@@ -12,16 +13,6 @@ interface GameCardProps {
 }
 
 export function GameCard({ game, onRemove }: GameCardProps) {
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("pt-BR", {
-      weekday: "short",
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  };
-
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 border-2 border-slate-100 hover:border-orange-200">
       <CardContent className="p-4 sm:p-6">
@@ -39,6 +30,14 @@ export function GameCard({ game, onRemove }: GameCardProps) {
             >
               {game.category}
             </Badge>
+            {game.championshipName && (
+              <Badge
+                variant="outline"
+                className="border-purple-300 text-purple-700 font-medium flex items-center gap-1"
+              >
+                <Trophy className="h-3 w-3" /> {game.championshipName}
+              </Badge>
+            )}
           </div>
           <Button
             variant="ghost"
@@ -83,7 +82,9 @@ export function GameCard({ game, onRemove }: GameCardProps) {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-sm text-slate-600">
           <div className="flex items-center gap-2 px-3 py-2 bg-slate-100 rounded-full">
             <Calendar className="h-4 w-4 text-blue-500" />
-            <span className="font-medium">{formatDate(game.date)}</span>
+            <span className="font-medium">
+              {formatDateWithDayName(game.date)}
+            </span>
           </div>
           <div className="flex items-center gap-2 px-3 py-2 bg-slate-100 rounded-full">
             <Clock className="h-4 w-4 text-green-500" />

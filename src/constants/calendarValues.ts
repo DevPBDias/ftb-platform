@@ -1,7 +1,18 @@
+import { Championship } from "@/types/competicao.types";
+
 export const GENDERS = [
   { value: "masculino", label: "Masculino" },
   { value: "feminino", label: "Feminino" },
   { value: "misto", label: "Misto" },
+];
+
+export const CHAMPIONSHIPS_DATABASE: Championship[] = [
+  { id: "1", name: "NBB - Novo Basquete Brasil" },
+  { id: "2", name: "Campeonato Paulista de Basquete" },
+  { id: "3", name: "Campeonato Carioca de Basquete" },
+  { id: "4", name: "Liga de Desenvolvimento de Basquete (LDB)" },
+  { id: "5", name: "Copa Super 8" },
+  { id: "6", name: "Campeonato Brasileiro Interclubes" },
 ];
 
 export const CATEGORIES = [

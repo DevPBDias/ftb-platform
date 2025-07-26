@@ -9,6 +9,8 @@ import {
   GameFormData,
   gameFormSchema,
 } from "@/schemas/basketball-calendar.schema";
+import { CHAMPIONSHIPS_DATABASE } from "@/constants/calendarValues";
+import { Championship } from "@/types/competicao.types";
 
 export function useGameForm() {
   const [games, setGames] = useState<CalendarGame[]>([]);
@@ -22,6 +24,7 @@ export function useGameForm() {
       category: "",
       date: "",
       time: "",
+      championshipId: "",
       homeTeamId: "",
       awayTeamId: "",
     },
@@ -65,6 +68,14 @@ export function useGameForm() {
     }
   };
 
+  const getChampionshipById = (
+    championshipId: string
+  ): Championship | undefined => {
+    return CHAMPIONSHIPS_DATABASE.find(
+      (championship) => championship.id === championshipId
+    );
+  };
+
   const getTeamById = (teamId: string): CalendarTeam | undefined => {
     return teams.find((team) => team.id === teamId);
   };
@@ -72,6 +83,14 @@ export function useGameForm() {
   const onSubmit = (data: GameFormData) => {
     const homeTeam = getTeamById(data.homeTeamId);
     const awayTeam = getTeamById(data.awayTeamId);
+    const championship = getChampionshipById(data.championshipId);
+
+    if (!homeTeam || !awayTeam || !championship) {
+      form.setError("root", {
+        message: "Erro ao buscar dados dos times ou campeonato",
+      });
+      return;
+    }
 
     if (!homeTeam || !awayTeam) {
       form.setError("root", { message: "Erro ao buscar dados dos times" });
@@ -85,6 +104,7 @@ export function useGameForm() {
       awayTeam: awayTeam.teamName,
       homeTeamLogo: homeTeam.logo,
       awayTeamLogo: awayTeam.logo,
+      championshipName: championship.name,
     };
 
     setGames((prev) => [...prev, newGame]);
@@ -110,5 +130,6 @@ export function useGameForm() {
     removeGame,
     getTeamById,
     saveAllGamesToDatabase,
+    getChampionshipById,
   };
 }

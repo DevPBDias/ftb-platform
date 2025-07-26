@@ -31,12 +31,16 @@ export const sidebarData = {
       isActive: true,
       items: [
         {
-          title: "Resultados",
+          title: "Resultados de partidas",
           url: "/dashboard/tabela/resultados",
         },
         {
           title: "Próxima rodada",
           url: "/dashboard/tabela/rodada",
+        },
+        {
+          title: "Registrar resultados",
+          url: "/dashboard/tabela/registrar-jogo",
         },
       ],
     },

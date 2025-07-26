@@ -8,3 +8,8 @@ export interface CompeticaoData {
   local: string;
   image?: string | StaticImageData | undefined;
 }
+
+export interface Championship {
+  id: string;
+  name: string;
+}

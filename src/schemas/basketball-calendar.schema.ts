@@ -4,6 +4,7 @@ export const gameFormSchema = z
   .object({
     gender: z.string().min(1, "Selecione um gênero"),
     category: z.string().min(1, "Selecione uma categoria"),
+    championshipId: z.string().min(1, "Selecione um campeonato"),
     date: z
       .string()
       .min(1, "Selecione uma data")

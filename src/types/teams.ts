@@ -45,4 +45,6 @@ export interface CalendarGame {
   awayTeam: string;
   homeTeamLogo: string;
   awayTeamLogo: string;
+  championshipId: string;
+  championshipName: string;
 }

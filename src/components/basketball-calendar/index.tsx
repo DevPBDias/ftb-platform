@@ -17,7 +17,7 @@ export default function BasketballCalendar() {
 
   return (
     <section className="flex flex-col items-center justify-center gap-2 w-full">
-      <div className="w-full relative mx-auto max-w-7xl p-4 sm:p-6 lg:p-8 space-y-4">
+      <div className="w-full relative mr-auto p-4 sm:p-6 space-y-2">
         <div className="w-full text-left space-y-3 sm:space-y-4">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl text-[#162456] font-bold">
             Calendário de Basquete
