@@ -122,7 +122,7 @@ const games = [
   },
 ];
 
-export default function UsePresenceData() {
+export default function ScheduleCard() {
   const [selectedGame, setSelectedGame] = useState(games[0]);
   const [direction, setDirection] = useState<1 | -1>(1);
 

@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { userSchema } from "@/schemas/login-schema";
+import { useRouter } from "next/navigation";
 
 type UserFormData = {
   email: string;
@@ -19,6 +20,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
+  const route = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -90,6 +92,7 @@ export function LoginForm({
         </div>
         <Button
           type="submit"
+          onClick={() => route.push("/dashboard")}
           className="w-full cursor-pointer bg-yellow-500 hover:bg-yellow-600 text-black"
         >
           Entrar

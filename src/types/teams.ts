@@ -26,3 +26,23 @@ export interface TeamData {
   }>;
   contact?: string;
 }
+
+export interface CalendarTeam {
+  id: string;
+  teamName: string;
+  logo: string;
+}
+
+export interface CalendarGame {
+  id: string;
+  gender: string;
+  category: string;
+  date: string;
+  time: string;
+  homeTeamId: string;
+  awayTeamId: string;
+  homeTeam: string;
+  awayTeam: string;
+  homeTeamLogo: string;
+  awayTeamLogo: string;
+}

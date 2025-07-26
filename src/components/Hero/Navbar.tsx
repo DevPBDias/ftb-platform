@@ -83,10 +83,9 @@ const ModernNavbar = () => {
                 >
                   <Link
                     href={item.link}
-                    className="relative px-4 py-2 text-white/90 hover:text-white font-medium text-sm xl:text-base transition-all duration-300 rounded-lg hover:bg-white/10 group"
+                    className="relative px-4 py-2 text-white/90 hover:text-yellow-400 font-medium text-sm xl:text-base transition-all duration-300 rounded-lg group"
                   >
                     <span className="relative z-10">{item.name}</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-yellow-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 group-hover:w-full group-hover:left-0 transition-all duration-300" />
                   </Link>
                 </motion.div>
