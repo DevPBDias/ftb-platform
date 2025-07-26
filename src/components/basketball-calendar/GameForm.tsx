@@ -24,14 +24,14 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { DateSelector } from "./DateSelector";
+import { DateTimeSelector } from "./DateTimeSelector";
+import { TimeSelector } from "./TimeSelector";
+import { TeamSelector } from "./TeamSelector";
 import { FormField as CustomFormField } from "./FormField";
 import type { UseFormReturn } from "react-hook-form";
 import { CalendarTeam } from "@/types/teams";
 import { GameFormData } from "@/schemas/basketball-calendar.schema";
 import { GENDERS, CATEGORIES } from "@/constants/calendarValues";
-import { TimeSelector } from "./TimeSelector";
-import { TeamSelector } from "./TeamSelector";
 
 interface GameFormProps {
   form: UseFormReturn<GameFormData>;
@@ -48,20 +48,23 @@ export function GameForm({ form, onSubmit, getTeamById }: GameFormProps) {
 
   return (
     <Card className="h-fit shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-      <CardHeader className="bg-gradient-to-r from-[#162456] to-blue-600 text-white rounded-t-lg py-3">
-        <CardTitle className="flex items-center gap-3 text-xl">
+      <CardHeader className="bg-gradient-to-r from-[#162456] to-blue-600 text-white rounded-t-lg p-4 sm:p-6">
+        <CardTitle className="flex items-center gap-3 text-xl sm:text-2xl">
           <div className="p-2 bg-white/20 rounded-full">
             <Plus className="h-6 w-6" />
           </div>
           Adicionar Novo Jogo
         </CardTitle>
-        <CardDescription className="text-orange-100">
+        <CardDescription className="text-orange-100 text-sm sm:text-base">
           Preencha os dados do jogo para adicionar ao calendário
         </CardDescription>
       </CardHeader>
-      <CardContent className="p-4">
+      <CardContent className="p-6 flex flex-col w-full justify-center items-center">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 w-full"
+          >
             <div className="grid gap-6 sm:grid-cols-2">
               <FormField
                 control={form.control}
@@ -97,7 +100,6 @@ export function GameForm({ form, onSubmit, getTeamById }: GameFormProps) {
                         </SelectContent>
                       </Select>
                     </CustomFormField>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -139,7 +141,6 @@ export function GameForm({ form, onSubmit, getTeamById }: GameFormProps) {
                         </SelectContent>
                       </Select>
                     </CustomFormField>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -147,16 +148,10 @@ export function GameForm({ form, onSubmit, getTeamById }: GameFormProps) {
 
             <Separator className="bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
 
-            <DateSelector
+            <DateTimeSelector
               control={form.control}
-              error={errors.date?.message}
-              value={watchedValues.date}
-            />
-
-            <TimeSelector
-              control={form.control}
-              error={errors.time?.message}
-              value={watchedValues.time}
+              dateError={errors.date?.message}
+              timeError={errors.time?.message}
             />
 
             <Separator className="bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
@@ -182,10 +177,10 @@ export function GameForm({ form, onSubmit, getTeamById }: GameFormProps) {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full h-14 text-lg font-bold bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-6 text-lg font-bold bg-gradient-to-r from-[#162456] to-blue-600 hover:from-blue-600 hover:to-[#162456] shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Plus className="mr-3 h-5 w-5" />
-              {isSubmitting ? "Adicionando..." : "Adicionar Jogo ao Calendário"}
+              {isSubmitting ? "Adicionando..." : "Adicionar jogo"}
             </Button>
           </form>
         </Form>

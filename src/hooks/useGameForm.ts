@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarGame, CalendarTeam } from "@/types/teams";
+import { toast } from "sonner";
 import {
   GameFormData,
   gameFormSchema,
@@ -12,6 +13,7 @@ import {
 export function useGameForm() {
   const [games, setGames] = useState<CalendarGame[]>([]);
   const [teams, setTeams] = useState<CalendarTeam[]>([]);
+  const [isSaving, setIsSaving] = useState(false);
 
   const form = useForm<GameFormData>({
     resolver: zodResolver(gameFormSchema),
@@ -50,6 +52,18 @@ export function useGameForm() {
     };
     getTeamDatabse();
   }, []);
+
+  const saveAllGamesToDatabase = async (gamesToSave: CalendarGame[]) => {
+    setIsSaving(true);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      toast.success("Jogos foram salvos");
+    } catch (error) {
+      toast.error(`Erro ao salvar jogos ${error}`);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const getTeamById = (teamId: string): CalendarTeam | undefined => {
     return teams.find((team) => team.id === teamId);
@@ -91,8 +105,10 @@ export function useGameForm() {
     games: sortedGames,
     form,
     teams,
+    isSaving,
     onSubmit,
     removeGame,
     getTeamById,
+    saveAllGamesToDatabase,
   };
 }

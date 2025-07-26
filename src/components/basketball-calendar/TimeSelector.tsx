@@ -26,20 +26,20 @@ export function TimeSelector({ control, error, value }: TimeSelectorProps) {
       label="Horário do Jogo"
       error={error}
       required
-      className="space-y-4 mt-8"
+      className="space-y-4"
     >
       <Controller
         name="time"
         control={control}
         render={({ field }) => (
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1 space-y-2">
               <span className="text-sm font-medium text-slate-600">
                 Horários Comuns
               </span>
               <Select value={field.value} onValueChange={field.onChange}>
                 <SelectTrigger
-                  className={`py-2 w-full mt-1 border-2 transition-colors ${
+                  className={`h-12 mt-1 w-full border-2 transition-colors ${
                     error
                       ? "border-red-300 hover:border-red-400"
                       : "border-slate-200 hover:border-blue-900"
@@ -77,7 +77,6 @@ export function TimeSelector({ control, error, value }: TimeSelectorProps) {
                 </SelectContent>
               </Select>
             </div>
-
             <div className="flex-1 space-y-2">
               <span className="text-sm font-medium text-slate-600">
                 Horário Personalizado

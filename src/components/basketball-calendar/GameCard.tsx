@@ -23,10 +23,10 @@ export function GameCard({ game, onRemove }: GameCardProps) {
   };
 
   return (
-    <Card className="group hover:shadow-lg transition-all duration-300 border-2 border-slate-100 hover:border-blue-900">
-      <CardContent className="p-4">
+    <Card className="group hover:shadow-lg transition-all duration-300 border-2 border-slate-100 hover:border-orange-200">
+      <CardContent className="p-4 sm:p-6">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <Badge
               variant="secondary"
               className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 font-medium capitalize"
@@ -50,37 +50,37 @@ export function GameCard({ game, onRemove }: GameCardProps) {
           </Button>
         </div>
 
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center sm:justify-between mb-4 gap-4 sm:gap-0">
+          <div className="flex items-center gap-3">
             <img
               src={game.homeTeamLogo || "/placeholder.svg"}
               alt={`Logo ${game.homeTeam}`}
-              className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-lg"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-white shadow-lg"
             />
-            <span className="font-bold text-slate-800 text-lg">
+            <span className="font-bold text-slate-800 text-base sm:text-lg">
               {game.homeTeam}
             </span>
           </div>
 
-          <div className="text-center px-6">
-            <div className="text-3xl font-black bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+          <div className="text-center px-4">
+            <div className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
               VS
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <span className="font-bold text-slate-800 text-lg">
+          <div className="flex items-center gap-3">
+            <span className="font-bold text-slate-800 text-base sm:text-lg">
               {game.awayTeam}
             </span>
             <img
               src={game.awayTeamLogo || "/placeholder.svg"}
               alt={`Logo ${game.awayTeam}`}
-              className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-lg"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-white shadow-lg"
             />
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-6 text-sm text-slate-600">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-sm text-slate-600">
           <div className="flex items-center gap-2 px-3 py-2 bg-slate-100 rounded-full">
             <Calendar className="h-4 w-4 text-blue-500" />
             <span className="font-medium">{formatDate(game.date)}</span>

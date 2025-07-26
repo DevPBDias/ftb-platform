@@ -34,7 +34,7 @@ export function TeamSelector({
   const { teams } = useGameForm();
 
   return (
-    <div className="w-full space-y-2 mt-4">
+    <div className="space-y-6 w-full">
       <div className="flex items-center gap-2">
         <Users className="h-5 w-5 text-blue-500" />
         <span className="text-lg font-semibold text-slate-800">Times</span>
@@ -111,12 +111,13 @@ export function TeamSelector({
           )}
         />
       </div>
+
       {(homeTeamId || awayTeamId) && (
         <div className="mt-3 w-full p-4 bg-gradient-to-r from-slate-50 to-slate-100 rounded-xl border border-slate-200">
           <h4 className="text-sm font-semibold mb-3 text-slate-700">
             Preview do Confronto:
           </h4>
-          <div className="flex items-center justify-center gap-6">
+          <div className="flex flex-col sm:flex-row items-center sm:justify-center gap-4 sm:gap-6">
             {homeTeamId && (
               <div className="flex items-center gap-3">
                 <img
@@ -124,21 +125,19 @@ export function TeamSelector({
                   alt="Home team"
                   className="w-10 h-10 rounded-full border-2 border-white shadow-md"
                 />
-                <span className="text-sm font-bold text-slate-700">
+                <span className="text-sm font-semibold text-slate-700">
                   {getTeamById(homeTeamId)?.teamName}
                 </span>
               </div>
             )}
-
             {homeTeamId && awayTeamId && (
               <div className="px-4 py-2 bg-gradient-to-r from-[#162456] to-blue-600 text-white font-bold rounded-full shadow-lg">
                 VS
               </div>
             )}
-
             {awayTeamId && (
               <div className="flex items-center gap-3">
-                <span className="text-sm font-bold text-slate-700">
+                <span className="text-sm font-semibold text-slate-700">
                   {getTeamById(awayTeamId)?.teamName}
                 </span>
                 <img

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import NavHeader from "@/components/sidebar/nav-header";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "FTB - Federação Tocantinense de Basketball",
@@ -23,6 +24,7 @@ export default function Layout({
           {children}
         </SidebarInset>
       </SidebarProvider>
+      <Toaster richColors position="top-right" />
     </main>
   );
 }
