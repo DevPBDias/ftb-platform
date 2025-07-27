@@ -24,8 +24,10 @@ export function ImageUploadSection({
             value && value.length > 0 ? value[0] : undefined,
         })}
       />
-      {errors.gameImage && (
-        <p className="text-red-500 text-sm">{errors.gameImage.message}</p>
+      {errors.gameImage && errors.gameImage.message && (
+        <p className="text-red-500 text-sm">
+          {String(errors.gameImage.message)}
+        </p>
       )}
     </div>
   );
