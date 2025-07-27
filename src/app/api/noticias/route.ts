@@ -1,29 +1,29 @@
-import {
-  collection,
-  getDocs,
-  query,
-  orderBy,
-  addDoc,
-} from "firebase/firestore";
-import { firestore } from "@/lib/firebase";
 import { NextResponse } from "next/server";
-import { NoticiasResponse } from "@/types/news.types";
+// Remova as importações do SDK do cliente para Firestore
+// import { collection, getDocs, query, orderBy, addDoc } from "firebase/firestore";
+
+// Importe a instância do Firestore do Firebase Admin SDK
+import { adminDB } from "@/lib/firebase-admin"; // Certifique-se de que o caminho está correto
+
+import { NoticiasResponse } from "@/types/news.types"; // Mantenha a importação do seu tipo
 
 export async function GET() {
   try {
     console.log("Iniciando requisição GET para /api/noticias...");
 
-    const noticiasCollectionRef = collection(firestore, "noticias");
-
-    const q = query(noticiasCollectionRef, orderBy("titulo", "asc"));
+    // Use adminDB para acessar a coleção
+    const noticiasCollectionRef = adminDB.collection("noticias");
 
     console.log(
-      "Tentando buscar documentos da coleção 'noticias' no Firestore..."
+      "Tentando buscar documentos da coleção 'noticias' no Firestore (Admin SDK)..."
     );
-    const snapshot = await getDocs(q);
+    // Para ordenar no Admin SDK, chame .orderBy() diretamente na referência da coleção
+    const snapshot = await noticiasCollectionRef.orderBy("titulo", "asc").get();
 
     const noticias: NoticiasResponse[] = [];
     snapshot.forEach((doc) => {
+      // doc.data() já retorna um objeto com os dados
+      // Você pode fazer um cast direto para o seu tipo
       noticias.push({ id: doc.id, ...(doc.data() as NoticiasResponse) });
     });
 
@@ -32,7 +32,7 @@ export async function GET() {
 
     return NextResponse.json(noticias, { status: 200 });
   } catch (error) {
-    console.error("Erro detalhado ao buscar noticias na API:", error);
+    console.error("Erro detalhado ao buscar noticias na API (GET):", error);
     return NextResponse.json(
       {
         message: "Erro interno do servidor ao buscar noticias",
@@ -46,9 +46,8 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const noticiasCollectionRef = collection(firestore, "noticias");
-
-    const docRef = await addDoc(noticiasCollectionRef, data);
+    // Use adminDB para acessar a coleção e adicionar o documento
+    const docRef = await adminDB.collection("noticias").add(data);
 
     return new Response(
       JSON.stringify({ id: docRef.id, message: "Noticia added successfully!" }),
@@ -58,7 +57,7 @@ export async function POST(request: Request) {
       }
     );
   } catch (error) {
-    console.error("Error adding noticia:", error);
+    console.error("Error adding noticia (POST):", error);
     return new Response(JSON.stringify({ error: "Failed to add news" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

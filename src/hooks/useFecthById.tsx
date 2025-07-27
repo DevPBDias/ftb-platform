@@ -1,49 +1,51 @@
-import { useEffect, useState } from "react";
-import { doc, getDoc, DocumentData } from "firebase/firestore";
-import { firestore } from "@/lib/firebase";
+// src/hooks/useFetchById.ts (exemplo)
+"use client";
 
-export function useFetchById<T = DocumentData>(
+import { useEffect, useState } from "react";
+
+interface FetchResult<T> {
+  data: T | null;
+  loading: boolean;
+  error: string | null;
+}
+
+export function useFetchById<T>(
   collectionName: string,
-  id: string | null
-) {
+  id: string
+): FetchResult<T> {
   const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState<boolean>(!!id);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!id) {
-      setLoading(false);
-      setData(null);
+    const fetchData = async () => {
+      setLoading(true);
       setError(null);
-      return;
-    }
-
-    let isMounted = true;
-
-    async function fetchDoc() {
       try {
-        const docRef = doc(firestore, collectionName, id as string);
-        const docSnap = await getDoc(docRef);
+        // Esta é a linha crítica. O endpoint da API deve estar correto!
+        // Por exemplo, se você quer buscar um clube, o endpoint deve ser /api/clubes/[id]
+        const response = await fetch(`/api/${collectionName}/${id}`);
 
-        if (!docSnap.exists()) {
-          throw new Error("Documento não encontrado.");
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(
+            errorData.message || `Erro ao buscar ${collectionName}.`
+          );
         }
 
-        if (isMounted) {
-          setData({ id: docSnap.id, ...docSnap.data() } as T);
-        }
-      } catch (e) {
-        if (isMounted) setError((e as Error).message);
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        setError((err as Error).message);
       } finally {
-        if (isMounted) setLoading(false);
+        setLoading(false);
       }
-    }
-
-    fetchDoc();
-
-    return () => {
-      isMounted = false;
     };
+
+    if (id) {
+      // Só busca se o ID for válido
+      fetchData();
+    }
   }, [collectionName, id]);
 
   return { data, loading, error };

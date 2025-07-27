@@ -4,24 +4,21 @@ import { createContext, useContext, type ReactNode } from "react";
 import { useTeamForm, type Person } from "@/hooks/use-team-form";
 import { useSubmissionStatus } from "@/hooks/use-submission-status";
 
-// Define the shape of the context value
 interface TeamFormContextType {
   teamName: string;
   setTeamName: (value: string) => void;
   teamCategory: string;
   setTeamCategory: (value: string) => void;
-  people: Person[]; // Consolidated people array
+  people: Person[];
   currentTeamInput: string;
   setCurrentTeamInput: (value: string) => void;
-  // Unified person input states
   currentPersonNameInput: string;
   setCurrentPersonNameInput: (value: string) => void;
   currentPersonDocumentInput: string;
   setCurrentPersonDocumentInput: (value: string) => void;
   currentPersonRoleInput: Person["role"] | "";
   setCurrentPersonRoleInput: (value: Person["role"] | "") => void;
-  // Generalized editing states and functions
-  allPeople: Person[]; // New combined and sorted list
+  allPeople: Person[];
   editingPersonId: string | null;
   editingPersonRole: Person["role"] | null;
   editName: string;
@@ -49,7 +46,6 @@ const TeamFormContext = createContext<TeamFormContextType | undefined>(
   undefined
 );
 
-// Custom hook to use the context
 export function useTeamFormContext() {
   const context = useContext(TeamFormContext);
   if (context === undefined) {
@@ -60,7 +56,6 @@ export function useTeamFormContext() {
   return context;
 }
 
-// Provider component
 interface TeamFormProviderProps {
   children: ReactNode;
 }
@@ -69,7 +64,6 @@ export function TeamFormProvider({ children }: TeamFormProviderProps) {
   const teamForm = useTeamForm();
   const submissionStatus = useSubmissionStatus();
 
-  // Combine all values from both hooks
   const value = {
     ...teamForm,
     ...submissionStatus,

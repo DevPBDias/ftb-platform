@@ -1,39 +1,19 @@
-"use client";
-import { FormSection } from "@/components/team-register/form-section";
-import { SummaryCard } from "@/components/team-register/summary-card";
-import { LoadingOverlay } from "@/components/loading/loading-overlay";
-import ModernNavbar from "@/components/Hero/Navbar";
-import {
-  TeamFormProvider,
-  useTeamFormContext,
-} from "@/context/team-form-context";
-import { SuccessModal } from "@/components/team-register/sucess-modal";
+import AboutHeroSection from "@/components/about/AboutHeroSection";
+import HistorySection from "@/components/about/HistorySection";
+import Mentions from "@/components/about/Mentions";
+import MobileCardBoard from "@/components/about/MobileCardBoard";
+import Footer from "@/components/Footer";
 
-export default function TeamRegistrationForm() {
+const About = () => {
   return (
-    <TeamFormProvider>
-      <TeamRegistrationFormContent />
-    </TeamFormProvider>
+    <main className="flex flex-col items-center justify-center w-full">
+      <AboutHeroSection />
+      <MobileCardBoard />
+      <HistorySection />
+      <Mentions />
+      <Footer />
+    </main>
   );
-}
+};
 
-// This component will consume the context
-function TeamRegistrationFormContent() {
-  const { isLoading, showSuccessModal, setShowSuccessModal } =
-    useTeamFormContext();
-
-  return (
-    <div className="min-h-screen bg-white">
-      <ModernNavbar />
-
-      <main className="container mx-auto p-6 md:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <FormSection /> {/* No props needed here */}
-        <SummaryCard /> {/* No props needed here */}
-      </main>
-
-      {isLoading && <LoadingOverlay />}
-
-      <SuccessModal isOpen={showSuccessModal} onClose={setShowSuccessModal} />
-    </div>
-  );
-}
+export default About;

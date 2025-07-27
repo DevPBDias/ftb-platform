@@ -4,7 +4,7 @@ import { RegisterForm } from "@/components/Login/register-form";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <main className="grid min-h-svh lg:grid-cols-2">
       <section className="bg-muted relative hidden lg:block">

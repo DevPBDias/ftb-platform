@@ -1,29 +1,31 @@
 import { NextResponse } from "next/server";
-import {
-  collection,
-  getDocs,
-  query,
-  orderBy,
-  addDoc,
-} from "firebase/firestore";
-import { firestore } from "../../../lib/firebase";
-import { CompeticaoData } from "@/types/competicao.types";
+// Remova as importações do SDK do cliente para Firestore
+// import { collection, getDocs, query, orderBy, addDoc } from "firebase/firestore";
+
+// Importe a instância do Firestore do Firebase Admin SDK
+import { adminDB } from "@/lib/firebase-admin"; // Certifique-se de que o caminho está correto
+
+import { CompeticaoData } from "@/types/competicao.types"; // Mantenha a importação do seu tipo
 
 export async function GET() {
   try {
     console.log("Iniciando requisição GET para /api/competicoes...");
 
-    const competicoesCollectionRef = collection(firestore, "competicoes");
-
-    const q = query(competicoesCollectionRef, orderBy("titulo", "asc"));
+    // Use adminDB para acessar a coleção
+    const competicoesCollectionRef = adminDB.collection("competicoes");
 
     console.log(
-      "Tentando buscar documentos da coleção 'competicoes' no Firestore..."
+      "Tentando buscar documentos da coleção 'competicoes' no Firestore (Admin SDK)..."
     );
-    const snapshot = await getDocs(q);
+    // Para ordenar no Admin SDK, chame .orderBy() diretamente na referência da coleção
+    const snapshot = await competicoesCollectionRef
+      .orderBy("titulo", "asc")
+      .get();
 
     const competicoes: CompeticaoData[] = [];
     snapshot.forEach((doc) => {
+      // doc.data() já retorna um objeto com os dados
+      // Você pode fazer um cast direto para o seu tipo
       competicoes.push({ id: doc.id, ...(doc.data() as CompeticaoData) });
     });
 
@@ -35,7 +37,7 @@ export async function GET() {
 
     return NextResponse.json(competicoes, { status: 200 });
   } catch (error) {
-    console.error("Erro detalhado ao buscar competições na API:", error);
+    console.error("Erro detalhado ao buscar competições na API (GET):", error);
     return NextResponse.json(
       {
         message: "Erro interno do servidor ao buscar competições",
@@ -49,9 +51,8 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const competicoesCollectionRef = collection(firestore, "competicoes");
-
-    const docRef = await addDoc(competicoesCollectionRef, data);
+    // Use adminDB para acessar a coleção e adicionar o documento
+    const docRef = await adminDB.collection("competicoes").add(data);
 
     return new Response(
       JSON.stringify({
@@ -64,7 +65,7 @@ export async function POST(request: Request) {
       }
     );
   } catch (error) {
-    console.error("Error adding competicao:", error);
+    console.error("Error adding competicao (POST):", error);
     return new Response(
       JSON.stringify({ error: "Failed to add competition" }),
       {

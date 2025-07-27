@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { firestore } from "@/lib/firebase";
+import { db } from "@/lib/firebase-client";
 import { collection, addDoc } from "firebase/firestore";
 import { format } from "date-fns";
 import { DateTimeSection } from "./date-time-section";
@@ -94,7 +94,7 @@ export default function GameResultForm() {
         createdAt: new Date(),
       };
 
-      await addDoc(collection(firestore, "gameResults"), gameData);
+      await addDoc(collection(db, "gameResults"), gameData);
       console.log(
         "Dados do Formulário Validados e Salvos no Firestore:",
         gameData

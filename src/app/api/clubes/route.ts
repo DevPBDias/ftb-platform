@@ -1,31 +1,33 @@
 import { NextResponse } from "next/server";
-import {
-  collection,
-  getDocs,
-  query,
-  orderBy,
-  addDoc,
-} from "firebase/firestore";
-import { firestore } from "../../../lib/firebase";
+import { adminDB } from "@/lib/firebase-admin"; // Importação CORRETA do ADMIN SDK
 import { TeamData } from "@/types/teams";
 
 export async function GET() {
   try {
     console.log("Iniciando requisição GET para /api/clubes...");
 
-    const clubesCollectionRef = collection(firestore, "clubes");
+    // Acessa a coleção diretamente do adminDB
+    const clubesCollectionRef = adminDB.collection("clubes");
 
-    const q = query(clubesCollectionRef, orderBy("teamName", "asc"));
-
+    // O Admin SDK Firestore usa métodos ligeiramente diferentes para queries
+    // Não precisa de 'query' e 'orderBy' separados como no cliente SDK.
+    // A ordem é aplicada diretamente na referência da coleção.
     console.log(
-      "Tentando buscar documentos da coleção 'clubes' no Firestore..."
+      "Tentando buscar documentos da coleção 'clubes' no Firestore (Admin SDK)..."
     );
-    const snapshot = await getDocs(q);
+    const snapshot = await clubesCollectionRef.orderBy("teamName", "asc").get();
 
     const clubes: TeamData[] = [];
     snapshot.forEach((doc) => {
-      const { id, ...data } = doc.data() as TeamData & { id?: string };
-      clubes.push({ id: doc.id, ...data });
+      // O tipo 'TeamData' precisa ter 'id', 'teamName', 'logo'
+      // Garanta que os campos 'teamName' e 'logo' existem nos seus documentos do Firestore
+      const data = doc.data(); // doc.data() já retorna um objeto com os campos
+      clubes.push({
+        id: doc.id,
+        teamName: data.teamName, // Confirme que 'teamName' é o nome do campo no Firestore
+        logo: data.logo, // Confirme que 'logo' é o nome do campo no Firestore
+        // Adicione outros campos de TeamData se existirem no Firestore
+      } as TeamData); // Cast para TeamData
     });
 
     console.log(`Número de clubes encontrados: ${clubes.length}`);
@@ -33,7 +35,7 @@ export async function GET() {
 
     return NextResponse.json(clubes, { status: 200 });
   } catch (error) {
-    console.error("Erro detalhado ao buscar clubes na API:", error);
+    console.error("Erro detalhado ao buscar clubes na API (GET):", error);
     return NextResponse.json(
       {
         message: "Erro interno do servidor ao buscar clubes",
@@ -47,9 +49,8 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const clubesCollectionRef = collection(firestore, "clubes");
-
-    const docRef = await addDoc(clubesCollectionRef, data);
+    // Acessa a coleção diretamente do adminDB para adicionar
+    const docRef = await adminDB.collection("clubes").add(data);
 
     return new Response(
       JSON.stringify({
@@ -62,7 +63,7 @@ export async function POST(request: Request) {
       }
     );
   } catch (error) {
-    console.error("Error adding Clube:", error);
+    console.error("Error adding Clube (POST):", error);
     return new Response(
       JSON.stringify({ error: "Failed to add competition" }),
       {
