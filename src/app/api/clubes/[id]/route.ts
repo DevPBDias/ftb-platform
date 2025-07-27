@@ -5,11 +5,16 @@ import { adminDB } from "@/lib/firebase-admin"; // Use o Firebase Admin SDK
 // Importe o tipo TeamData, se necessário para tipagem
 import { TeamData } from "@/types/teams";
 
-interface Params {
+// Definição da interface Params para tipagem do ID dinâmico
+interface RouteParams {
   id: string; // O ID do documento que virá da URL
 }
 
-export async function GET(request: Request, { params }: { params: Params }) {
+export async function GET(
+  request: Request,
+  // A assinatura correta para rotas dinâmicas no App Router
+  { params }: { params: RouteParams } // Use RouteParams aqui
+) {
   try {
     const { id } = params; // Obtém o ID da URL
 
@@ -33,6 +38,7 @@ export async function GET(request: Request, { params }: { params: Params }) {
       );
     }
 
+    // Certifique-se de que os dados do documento correspondem ao seu tipo TeamData
     const teamData = { id: docSnapshot.id, ...docSnapshot.data() } as TeamData;
 
     console.log(`Clube encontrado: ${JSON.stringify(teamData, null, 2)}`);
