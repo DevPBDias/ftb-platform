@@ -13,6 +13,7 @@ import { type Control, Controller } from "react-hook-form";
 import { useGameForm } from "@/hooks/useGameForm";
 import { GameFormData } from "@/schemas/basketball-calendar.schema";
 import { CalendarTeam } from "@/types/teams";
+import Image from "next/image";
 
 interface TeamSelectorProps {
   control: Control<GameFormData>;
@@ -60,7 +61,7 @@ export function TeamSelector({
                   {teams.map((team) => (
                     <SelectItem key={team.id} value={team.id}>
                       <div className="flex items-center gap-3">
-                        <img
+                        <Image
                           src={team.logo || "/placeholder.svg"}
                           alt={team.teamName}
                           className="w-6 h-6 rounded-full border border-slate-200"
@@ -96,7 +97,7 @@ export function TeamSelector({
                     .map((team) => (
                       <SelectItem key={team.id} value={team.id}>
                         <div className="flex items-center gap-3">
-                          <img
+                          <Image
                             src={team.logo || "/placeholder.svg"}
                             alt={team.teamName}
                             className="w-6 h-6 rounded-full border border-slate-200"
@@ -120,7 +121,7 @@ export function TeamSelector({
           <div className="flex flex-col sm:flex-row items-center sm:justify-center gap-4 sm:gap-6">
             {homeTeamId && (
               <div className="flex items-center gap-3">
-                <img
+                <Image
                   src={getTeamById(homeTeamId)?.logo || "/placeholder.svg"}
                   alt="Home team"
                   className="w-10 h-10 rounded-full border-2 border-white shadow-md"
@@ -140,7 +141,7 @@ export function TeamSelector({
                 <span className="text-sm font-semibold text-slate-700">
                   {getTeamById(awayTeamId)?.teamName}
                 </span>
-                <img
+                <Image
                   src={getTeamById(awayTeamId)?.logo || "/placeholder.svg"}
                   alt="Away team"
                   className="w-10 h-10 rounded-full border-2 border-white shadow-md"

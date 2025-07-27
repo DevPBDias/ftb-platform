@@ -54,15 +54,22 @@ export function LoginForm({
       }
 
       router.push("/dashboard");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Erro ao fazer login:", err);
       if (
-        err.code === "auth/user-not-found" ||
-        err.code === "auth/wrong-password"
+        typeof err === "object" &&
+        err !== null &&
+        "code" in err &&
+        typeof (err as { code?: unknown }).code === "string"
       ) {
-        setError("E-mail ou senha inválidos.");
-      } else if (err.code === "auth/invalid-email") {
-        setError("Formato de e-mail inválido.");
+        const code = (err as { code: string }).code;
+        if (code === "auth/user-not-found" || code === "auth/wrong-password") {
+          setError("E-mail ou senha inválidos.");
+        } else if (code === "auth/invalid-email") {
+          setError("Formato de e-mail inválido.");
+        } else {
+          setError("Ocorreu um erro ao tentar fazer login. Tente novamente.");
+        }
       } else {
         setError("Ocorreu um erro ao tentar fazer login. Tente novamente.");
       }
@@ -92,7 +99,7 @@ export function LoginForm({
       }
 
       router.push("/dashboard");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Erro ao fazer login com Google:", err);
       setError(
         "Ocorreu um erro ao tentar fazer login com Google. Tente novamente."

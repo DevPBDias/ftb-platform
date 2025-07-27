@@ -30,3 +30,16 @@ export interface InfoCardProps {
   type?: "noticias" | "competicoes";
   index?: number;
 }
+
+export interface GameCard {
+  id: string;
+  name: string;
+  date: string;
+  time: string;
+  team1Name: string;
+  team1Score: number;
+  team1Logo: string;
+  team2Name: string;
+  team2Score: number;
+  team2Logo: string;
+}

@@ -111,7 +111,7 @@ export function GameDisplay({
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
-          {currentGames.map((game: any, index: number) => (
+          {currentGames.map((game, index) => (
             <motion.div
               key={game.id}
               initial={{ opacity: 0, y: 20 }}

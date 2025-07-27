@@ -76,7 +76,7 @@ export default function GameResultForm() {
 
   const onSubmit = async (data: FormValues) => {
     setSubmissionMessage(null);
-    let imageUrl: string | null = null;
+    const imageUrl: string | null = null;
 
     try {
       const gameData = {
