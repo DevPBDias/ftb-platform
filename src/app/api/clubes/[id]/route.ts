@@ -5,18 +5,22 @@ import { adminDB } from "@/lib/firebase-admin"; // Use o Firebase Admin SDK
 // Importe o tipo TeamData, se necessário para tipagem
 import { TeamData } from "@/types/teams";
 
-// Definição da interface Params para tipagem do ID dinâmico
-interface RouteParams {
-  id: string; // O ID do documento que virá da URL
+// Definimos uma interface para o objeto de contexto que contém os parâmetros de rota.
+interface RouteContext {
+  params: {
+    id: string; // O ID do documento que virá da URL dinâmica
+  };
 }
 
 export async function GET(
   request: Request,
-  // A assinatura correta para rotas dinâmicas no App Router
-  { params }: { params: RouteParams } // Use RouteParams aqui
+  // Tipamos o segundo argumento como RouteContext.
+  // Isso torna a estrutura esperada mais explícita para o compilador do Next.js.
+  context: RouteContext
 ) {
   try {
-    const { id } = params; // Obtém o ID da URL
+    // Acessamos o ID através de context.params.id
+    const { id } = context.params;
 
     if (!id) {
       return NextResponse.json(

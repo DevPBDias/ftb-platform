@@ -62,6 +62,8 @@ export function TeamSelector({
                     <SelectItem key={team.id} value={team.id}>
                       <div className="flex items-center gap-3">
                         <Image
+                          width={40}
+                          height={40}
                           src={team.logo || "/placeholder.svg"}
                           alt={team.teamName}
                           className="w-6 h-6 rounded-full border border-slate-200"
@@ -98,6 +100,8 @@ export function TeamSelector({
                       <SelectItem key={team.id} value={team.id}>
                         <div className="flex items-center gap-3">
                           <Image
+                            width={40}
+                            height={40}
                             src={team.logo || "/placeholder.svg"}
                             alt={team.teamName}
                             className="w-6 h-6 rounded-full border border-slate-200"
@@ -122,6 +126,8 @@ export function TeamSelector({
             {homeTeamId && (
               <div className="flex items-center gap-3">
                 <Image
+                  width={40}
+                  height={40}
                   src={getTeamById(homeTeamId)?.logo || "/placeholder.svg"}
                   alt="Home team"
                   className="w-10 h-10 rounded-full border-2 border-white shadow-md"
@@ -142,6 +148,8 @@ export function TeamSelector({
                   {getTeamById(awayTeamId)?.teamName}
                 </span>
                 <Image
+                  width={40}
+                  height={40}
                   src={getTeamById(awayTeamId)?.logo || "/placeholder.svg"}
                   alt="Away team"
                   className="w-10 h-10 rounded-full border-2 border-white shadow-md"
