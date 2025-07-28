@@ -14,6 +14,8 @@ interface GameCardProps {
 }
 
 export function GameCard({ game, onRemove }: GameCardProps) {
+  console.log(game.homeTeamLogo, game.awayTeamLogo);
+
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 border-2 border-slate-100 hover:border-orange-200">
       <CardContent className="p-4 sm:p-6">
@@ -53,6 +55,8 @@ export function GameCard({ game, onRemove }: GameCardProps) {
         <div className="flex flex-col sm:flex-row items-center sm:justify-between mb-4 gap-4 sm:gap-0">
           <div className="flex items-center gap-3">
             <Image
+              width={40}
+              height={40}
               src={game.homeTeamLogo || "/placeholder.svg"}
               alt={`Logo ${game.homeTeam}`}
               className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-white shadow-lg"
@@ -73,6 +77,8 @@ export function GameCard({ game, onRemove }: GameCardProps) {
               {game.awayTeam}
             </span>
             <Image
+              width={40}
+              height={40}
               src={game.awayTeamLogo || "/placeholder.svg"}
               alt={`Logo ${game.awayTeam}`}
               className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-white shadow-lg"

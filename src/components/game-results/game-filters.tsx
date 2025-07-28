@@ -1,12 +1,8 @@
 "use client";
 
 import type React from "react";
-
-import { useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, SearchIcon } from "lucide-react"; // Importa SearchIcon
-import { Input } from "@/components/ui/input"; // Importa Input
-
+import { CalendarIcon, SearchIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -21,57 +17,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { championships } from "@/constants/resultsData";
+import { useGameFilters } from "@/hooks/use-game-filters"; // Importa o custom hook
+import { Championship } from "@/context/game-results-context";
 
-interface GameFiltersProps {
-  onFilterChange: (
-    date: Date | undefined,
-    championshipId: string | undefined,
-    searchTerm: string
-  ) => void;
-  onResetFilters: () => void;
-  initialDate?: Date;
-  initialChampionshipId?: string;
-  initialSearchTerm?: string;
-}
-
-export function GameFilters({
-  onFilterChange,
-  onResetFilters,
-  initialDate,
-  initialChampionshipId,
-  initialSearchTerm,
-}: GameFiltersProps) {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
-    initialDate
-  );
-  const [selectedChampionship, setSelectedChampionship] = useState<
-    string | undefined
-  >(initialChampionshipId);
-  const [searchTerm, setSearchTerm] = useState<string>(initialSearchTerm || "");
+export function GameFilters() {
+  const {
+    selectedDate,
+    selectedChampionshipId,
+    searchTerm,
+    championships, // Agora vem do contexto
+    handleFilterChange,
+    handleResetFilters,
+  } = useGameFilters();
 
   const handleDateChange = (date: Date | undefined) => {
-    setSelectedDate(date);
-    onFilterChange(date, selectedChampionship, searchTerm);
+    handleFilterChange(date, selectedChampionshipId, searchTerm);
   };
 
   const handleChampionshipChange = (championshipId: string | undefined) => {
-    setSelectedChampionship(championshipId);
-    onFilterChange(selectedDate, championshipId, searchTerm);
+    handleFilterChange(selectedDate, championshipId, searchTerm);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newSearchTerm = e.target.value;
-    setSearchTerm(newSearchTerm);
-    onFilterChange(selectedDate, selectedChampionship, newSearchTerm);
-  };
-
-  const handleReset = () => {
-    setSelectedDate(undefined);
-    setSelectedChampionship(undefined);
-    setSearchTerm("");
-    onResetFilters();
+    handleFilterChange(selectedDate, selectedChampionshipId, e.target.value);
   };
 
   return (
@@ -143,14 +113,17 @@ export function GameFilters({
             </label>
             <Select
               onValueChange={handleChampionshipChange}
-              value={selectedChampionship}
+              value={selectedChampionshipId}
             >
               <SelectTrigger className="w-full mt-2 h-10 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-700">
                 <SelectValue placeholder="Selecione um campeonato" />
               </SelectTrigger>
               <SelectContent className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg text-gray-900 dark:text-gray-100">
-                {championships.map((champ: { id: string; name: string }) => (
-                  <SelectItem key={champ.id} value={champ.id}>
+                {championships.map((champ: Championship) => (
+                  <SelectItem
+                    key={champ.id}
+                    value={champ.id ? champ.id : "Sem nome"}
+                  >
                     {champ.name}
                   </SelectItem>
                 ))}
@@ -158,9 +131,9 @@ export function GameFilters({
             </Select>
           </div>
           <Button
-            onClick={handleReset}
+            onClick={handleResetFilters}
             variant="outline"
-            className="h-10 rounded-md border border-blue-700 bg-blue-800 text-gray-100 hover:bg-blue-700"
+            className="h-10 rounded-md border border-blue-700 bg-blue-800 text-gray-100 hover:bg-blue-700 hover:text-white"
           >
             Limpar Filtros
           </Button>
