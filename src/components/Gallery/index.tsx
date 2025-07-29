@@ -100,7 +100,7 @@ const ModernPhotosGallery = () => {
                 </p>
               </div>
               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="p-2 bg-white/20 backdrop-blur-sm rounded-full">
+                <div className="p-2 bg-black/30 backdrop-blur-sm rounded-full">
                   <Expand size={16} className="text-white" />
                 </div>
               </div>
@@ -133,7 +133,7 @@ const ModernPhotosGallery = () => {
                 </p>
               </div>
               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="p-2 bg-white/20 backdrop-blur-sm rounded-full">
+                <div className="p-2 bg-black/30 backdrop-blur-sm rounded-full">
                   <Expand size={16} className="text-white" />
                 </div>
               </div>
@@ -169,7 +169,7 @@ const ModernPhotosGallery = () => {
                 <p className="text-white/90">{galleryImages[2].description}</p>
               </div>
               <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="p-3 bg-white/20 backdrop-blur-sm rounded-full">
+                <div className="p-3 bg-black/30 backdrop-blur-sm rounded-full">
                   <Expand size={20} className="text-white" />
                 </div>
               </div>
@@ -202,7 +202,7 @@ const ModernPhotosGallery = () => {
                 </p>
               </div>
               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="p-2 bg-white/20 backdrop-blur-sm rounded-full">
+                <div className="p-2 bg-black/30 backdrop-blur-sm rounded-full">
                   <Expand size={16} className="text-white" />
                 </div>
               </div>
@@ -235,7 +235,7 @@ const ModernPhotosGallery = () => {
                 </p>
               </div>
               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="p-2 bg-white/20 backdrop-blur-sm rounded-full">
+                <div className="p-2 bg-black/30 backdrop-blur-sm rounded-full">
                   <Expand size={16} className="text-white" />
                 </div>
               </div>
