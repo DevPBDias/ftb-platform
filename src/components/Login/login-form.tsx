@@ -123,7 +123,7 @@ export function LoginForm({
       </div>
       <div className="grid gap-6">
         <Button
-          variant="outline"
+          variant="ftb"
           className="w-full cursor-pointer"
           onClick={handleGoogleSignIn}
           disabled={loading}

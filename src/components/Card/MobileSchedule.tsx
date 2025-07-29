@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { MatchData } from "@/types/match.type";
 import Image from "next/image";
 
-export default function LiquidGlassUpcomingGames() {
+export default function MobileSchedule() {
   const [upcomingGames, setUpcomingGames] = useState<MatchData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -36,17 +36,17 @@ export default function LiquidGlassUpcomingGames() {
       initial={{ opacity: 0, y: -50, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="hidden lg:block relative w-full max-w-sm sm:max-w-md lg:max-w-lg mb-8 px-4"
+      className="lg:hidden block relative w-full max-w-sm sm:max-w-md lg:max-w-lg mb-8 px-4 mt-52"
     >
       <div className="relative overflow-hidden rounded-3xl">
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-teal-500/20"
+          className="absolute inset-0 bg-gradient-to-r from-blue-600/80 via-blue-700/80 to-blue-800/80"
           animate={{
             background: [
-              "linear-gradient(45deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2), rgba(20, 184, 166, 0.2))",
-              "linear-gradient(90deg, rgba(6, 182, 212, 0.2), rgba(20, 184, 166, 0.2), rgba(59, 130, 246, 0.2))",
-              "linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2))",
-              "linear-gradient(45deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2), rgba(20, 184, 166, 0.2))",
+              "linear-gradient(45deg, rgba(37, 99, 235, 0.8), rgba(29, 78, 216, 0.8), rgba(30, 58, 138, 0.8))",
+              "linear-gradient(90deg, rgba(29, 78, 216, 0.8), rgba(30, 58, 138, 0.8), rgba(37, 99, 235, 0.8))",
+              "linear-gradient(135deg, rgba(30, 58, 138, 0.8), rgba(37, 99, 235, 0.8), rgba(29, 78, 216, 0.8))",
+              "linear-gradient(45deg, rgba(37, 99, 235, 0.8), rgba(29, 78, 216, 0.8), rgba(30, 58, 138, 0.8))",
             ],
           }}
           transition={{
@@ -113,35 +113,37 @@ export default function LiquidGlassUpcomingGames() {
                     key={game.id}
                     className="mb-3 pb-3 border-b border-white/10 last:border-b-0 last:pb-0"
                   >
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-gray-300 mb-3">
-                      <span className="mb-0.5 sm:mb-0">{game.date}</span>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-gray-200 mb-2">
+                      <span className="mb-0.5 sm:mb-0 w-full text-center">
+                        {game.date}
+                      </span>
                     </div>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-base font-semibold">
-                      <div className="flex items-center gap-1.5 mb-0.5 sm:mb-3">
+                      <div className="flex items-center gap-1.5 mb-0.5 sm:mb-2">
                         <Image
-                          width={24}
-                          height={24}
+                          width={32}
+                          height={32}
                           src={game.homeTeamLogo || "/placeholder.svg"}
                           alt={`${game.homeTeam} logo`}
-                          className="w-5 h-5 rounded-full object-cover"
+                          className="w-8 h-8 rounded-full object-cover"
                         />
                         <span>{game.homeTeam}</span>
                       </div>
-                      <span className="text-gray-400 text-sm sm:text-base mx-1.5">
+                      <span className="text-gray-200 text-base sm:text-base w-full text-center">
                         vs
                       </span>
-                      <div className="flex items-center gap-1.5">
-                        <span>{game.awayTeam}</span>
+                      <div className="w-full flex items-center gap-1.5">
+                        <span className="ml-auto">{game.awayTeam}</span>
                         <Image
-                          width={24}
-                          height={24}
+                          width={32}
+                          height={32}
                           src={game.awayTeamLogo || "/placeholder.svg"}
                           alt={`${game.awayTeam} logo`}
-                          className="w-5 h-5 rounded-full object-cover"
+                          className="w-8 h-8 rounded-full object-cover"
                         />
                       </div>
                     </div>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-gray-200 mt-1 w-full text-center">
                       {game.category} - {game.championshipName}
                     </p>
                   </div>

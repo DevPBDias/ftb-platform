@@ -16,13 +16,13 @@ export default function AnimatedHeroSection() {
         ease: [0, 0.71, 0.2, 1.01],
       }}
     >
-      <div className="flex flex-col items-start md:items-center lg:items-start justify-center w-full md:w-4/5 lg:w-[45%] h-full gap-4">
-        <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold md:text-center lg:text-left text-balance">
-          Promovendo o basquete{" "}
-          <span className="text-yellow-500 uppercase">Tocantinense</span> desde
-          a base
+      <div className="flex flex-col items-center lg:items-start justify-center w-full md:w-4/5 lg:w-[45%] h-full gap-4">
+        <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold text-center lg:text-left">
+          Promovendo o{" "}
+          <span className="text-yellow-500 uppercase">basquete</span> desde a
+          base
         </h1>
-        <p className="text-white text-sm lg:text-xl font-normal w-full md:text-center md:w-3/5 lg:text-left lg:w-full text-balance">
+        <p className="text-white text-sm lg:text-xl font-normal w-full text-center md:w-3/5 lg:text-left lg:w-full text-balance">
           Com responsabilidade, paixão e olho no futuro de cada jovem atleta.
           Aqui, o basquete vai além do jogo: é crescimento, é comunidade, é
           transformação.
@@ -32,20 +32,6 @@ export default function AnimatedHeroSection() {
         </button>
       </div>
       <Schedule />
-      <motion.div
-        className="lg:hidden md:-mt-40"
-        animate={{
-          y: [0, -30, 0],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          repeatType: "loop",
-          ease: "easeInOut",
-        }}
-      >
-        <ArrowBigDownDash color="white" size={36} />
-      </motion.div>
     </motion.div>
   );
 }
