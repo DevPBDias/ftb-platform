@@ -153,7 +153,7 @@ const ModernPhotosGallery = () => {
                 src={galleryImages[2].src || "/placeholder.svg"}
                 alt={galleryImages[2].alt}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                className="object-fill transition-transform duration-700 group-hover:scale-110"
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
