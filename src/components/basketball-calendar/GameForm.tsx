@@ -9,29 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { DateTimeSelector } from "./DateTimeSelector";
-import { TimeSelector } from "./TimeSelector";
 import { TeamSelector } from "./TeamSelector";
-import { FormField as CustomFormField } from "./FormField";
 import type { UseFormReturn } from "react-hook-form";
 import { CalendarTeam } from "@/types/teams";
 import { GameFormData } from "@/schemas/basketball-calendar.schema";
-import { GENDERS, CATEGORIES } from "@/constants/calendarValues";
 import { GameDetailsSelector } from "./GameDetailsSelector";
 import { ChampionshipSelector } from "./ChampionshipSelector";
 

@@ -19,10 +19,15 @@ export default function MobileSchedule() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data: MatchData[] = await response.json();
+
         const filteredGames = data.filter((game) => game.status === "agendado");
         setUpcomingGames(filteredGames);
-      } catch (e: any) {
-        setError(e.message);
+      } catch (e: unknown) {
+        if (e instanceof Error) {
+          setError(e.message);
+        } else {
+          setError("Ocorreu um erro desconhecido.");
+        }
       } finally {
         setLoading(false);
       }

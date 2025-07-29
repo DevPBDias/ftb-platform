@@ -25,8 +25,12 @@ export default function Schedule() {
         }
         const data: MatchData[] = await response.json();
         setGames(data);
-      } catch (e: any) {
-        setError(e.message);
+      } catch (e: unknown) {
+        if (e instanceof Error) {
+          setError(e.message);
+        } else {
+          setError("Ocorreu um erro desconhecido.");
+        }
       } finally {
         setLoading(false);
       }

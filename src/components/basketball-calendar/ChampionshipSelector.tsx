@@ -1,6 +1,5 @@
 "use client";
 
-import { Trophy } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -8,12 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { FormControl, FormField, FormItem } from "@/components/ui/form";
 import { FormField as CustomFormField } from "./FormField";
 import type { Control } from "react-hook-form";
 import { CHAMPIONSHIPS_DATABASE } from "@/constants/calendarValues";
