@@ -7,6 +7,7 @@ export interface NoticiasResponse {
   datas: string[];
   local: string;
   image?: string | StaticImageData;
+  type?: string;
 }
 
 export interface NoticiaData {

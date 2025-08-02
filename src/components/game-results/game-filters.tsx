@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { useGameFilters } from "@/hooks/use-game-filters"; // Importa o custom hook
+import { useGameFilters } from "@/hooks/use-game-filters";
 import { Championship } from "@/context/game-results-context";
 
 export function GameFilters() {
@@ -27,7 +27,7 @@ export function GameFilters() {
     selectedDate,
     selectedChampionshipId,
     searchTerm,
-    championships, // Agora vem do contexto
+    championships,
     handleFilterChange,
     handleResetFilters,
   } = useGameFilters();
@@ -45,20 +45,22 @@ export function GameFilters() {
   };
 
   return (
-    <div className="hidden border-r bg-white dark:bg-gray-900 md:block shadow-sm">
-      <div className="flex h-full max-h-screen flex-col gap-4 p-4">
-        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">
+    <div className="w-full p-4">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 whitespace-nowrap">
           Filtros de Jogos
         </h2>
-        <div className="grid gap-6">
-          <div>
+        
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 flex-1">
+          {/* Busca por Time */}
+          <div className="flex-1 min-w-0">
             <label
               htmlFor="search-team"
-              className="text-sm font-medium leading-none text-gray-700 dark:text-gray-300"
+              className="text-sm font-medium leading-none text-gray-700 dark:text-gray-300 block mb-1"
             >
               Buscar por Time
             </label>
-            <div className="relative mt-2">
+            <div className="relative">
               <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 dark:text-gray-400" />
               <Input
                 id="search-team"
@@ -70,10 +72,12 @@ export function GameFilters() {
               />
             </div>
           </div>
-          <div>
+
+          {/* Filtro por Data */}
+          <div className="flex-1 min-w-0">
             <label
               htmlFor="date-filter"
-              className="text-sm font-medium leading-none text-gray-700 dark:text-gray-300"
+              className="text-sm font-medium leading-none text-gray-700 dark:text-gray-300 block mb-1"
             >
               Filtrar por Data
             </label>
@@ -82,7 +86,7 @@ export function GameFilters() {
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-full justify-start text-left font-normal mt-2 h-10 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-700",
+                    "w-full justify-start text-left font-normal h-10 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-700",
                     !selectedDate && "text-muted-foreground"
                   )}
                 >
@@ -104,10 +108,12 @@ export function GameFilters() {
               </PopoverContent>
             </Popover>
           </div>
-          <div>
+
+          {/* Filtro por Campeonato */}
+          <div className="flex-1 min-w-0">
             <label
               htmlFor="championship-filter"
-              className="text-sm font-medium leading-none text-gray-700 dark:text-gray-300"
+              className="text-sm font-medium leading-none text-gray-700 dark:text-gray-300 block mb-1"
             >
               Filtrar por Campeonato
             </label>
@@ -115,7 +121,7 @@ export function GameFilters() {
               onValueChange={handleChampionshipChange}
               value={selectedChampionshipId}
             >
-              <SelectTrigger className="w-full mt-2 h-10 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-700">
+              <SelectTrigger className="w-full h-10 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-700">
                 <SelectValue placeholder="Selecione um campeonato" />
               </SelectTrigger>
               <SelectContent className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg text-gray-900 dark:text-gray-100">
@@ -130,13 +136,17 @@ export function GameFilters() {
               </SelectContent>
             </Select>
           </div>
-          <Button
-            onClick={handleResetFilters}
-            variant="outline"
-            className="h-10 rounded-md border border-blue-700 bg-blue-800 text-gray-100 hover:bg-blue-700 hover:text-white"
-          >
-            Limpar Filtros
-          </Button>
+
+          {/* Botão Limpar Filtros */}
+          <div className="flex items-end">
+            <Button
+              onClick={handleResetFilters}
+              variant="outline"
+              className="h-10 rounded-md border border-blue-700 bg-blue-800 text-gray-100 hover:bg-blue-700 hover:text-white whitespace-nowrap"
+            >
+              Limpar Filtros
+            </Button>
+          </div>
         </div>
       </div>
     </div>

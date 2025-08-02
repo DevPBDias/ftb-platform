@@ -50,25 +50,19 @@ const ModernFooter = () => {
           >
             <Link
               href="/"
-              className="group flex items-center gap-3 hover:scale-105 transition-transform duration-300"
+              className="group flex items-center gap-3 hover:scale-105 transition-transform duration-150"
             >
-              <div className="relative">
-                <Image
-                  src={logoFTB}
-                  alt="Logo FTB"
-                  width={64}
-                  height={64}
-                  className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-xl shadow-lg"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#162456]/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
+              <Image
+                src={logoFTB}
+                alt="Logo FTB"
+                width={64}
+                height={64}
+                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-xl"
+              />
               <div className="text-center lg:text-left">
                 <h3 className="font-bold text-lg sm:text-xl text-[#162456] leading-tight max-w-40">
                   Federação Tocantinense de Basketball
                 </h3>
-                <p className="text-sm text-slate-600 mt-1">
-                  Excelência no esporte
-                </p>
               </div>
             </Link>
 

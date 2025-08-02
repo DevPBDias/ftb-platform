@@ -1,7 +1,7 @@
 "use client";
 
-import type { MemberFederation } from "@/constants/professionalCard";
-import { X, Info, ChevronRight } from "lucide-react";
+import type { MemberFederation } from "@/types/cards.types";
+import { X, Info, ChevronRight, User } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -11,18 +11,40 @@ interface CardProps {
 
 const ModernProfessionalCard = ({ data }: CardProps) => {
   const [showDetails, setShowDetails] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  // Função para lidar com erro de imagem
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
+  // Função para renderizar imagem ou placeholder
+  const renderImage = () => {
+    if (imageError || !data.image) {
+      return (
+        <div className="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center">
+          <User className="w-16 h-16 text-slate-400" />
+        </div>
+      );
+    }
+
+    return (
+      <Image
+        src={data.image}
+        alt={`Professional photo of ${data.name}`}
+        fill
+        className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 60vw, 40vw"
+        priority
+        onError={handleImageError}
+      />
+    );
+  };
 
   return (
     <div className="group relative h-[500px] lg:h-[550px] w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-slate-100 to-slate-200 shadow-xl sm:shadow-2xl transition-all duration-500 hover:shadow-2xl sm:hover:shadow-3xl hover:scale-[1.01]">
       <div className="relative h-full w-full">
-        <Image
-          src={data.image}
-          alt={`Professional photo of ${data.name}`}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 60vw, 40vw"
-          priority
-        />
+        {renderImage()}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
 
@@ -33,16 +55,22 @@ const ModernProfessionalCard = ({ data }: CardProps) => {
               {data.name}
             </h3>
             <div className="flex flex-wrap gap-1 mb-3 sm:mb-4">
-              {data.jobFuntion.map((job, index) => (
-                <span
-                  key={index}
-                  className={`inline-block bg-white/20 backdrop-blur-sm rounded-full px-2 sm:px-3 py-1 text-xs font-medium border border-white/30 line-clamp-1 ${
-                    index === 0 ? "" : "hidden sm:inline-block"
-                  }`}
-                >
-                  {job}
+              {Array.isArray(data.jobFunction) ? (
+                data.jobFunction.map((job, index) => (
+                  <span
+                    key={index}
+                    className={`inline-block bg-white/20 backdrop-blur-sm rounded-full px-2 sm:px-3 py-1 text-xs font-medium border border-white/30 line-clamp-1 ${
+                      index === 0 ? "" : "hidden sm:inline-block"
+                    }`}
+                  >
+                    {job}
+                  </span>
+                ))
+              ) : (
+                <span className="inline-block bg-white/20 backdrop-blur-sm rounded-full px-2 sm:px-3 py-1 text-xs font-medium border border-white/30 line-clamp-1">
+                  {data.jobFunction}
                 </span>
-              ))}
+              )}
             </div>
           </div>
         </div>
@@ -65,14 +93,23 @@ const ModernProfessionalCard = ({ data }: CardProps) => {
                   {data.name}
                 </h3>
                 <div className="flex flex-col gap-1.5 sm:gap-2">
-                  {data.jobFuntion.map((job, index) => (
-                    <div key={index} className="flex items-center gap-2">
+                  {Array.isArray(data.jobFunction) ? (
+                    data.jobFunction.map((job, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <div className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-blue-300 flex-shrink-0" />
+                        <p className="text-slate-200 font-medium text-base leading-relaxed">
+                          {job}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="flex items-center gap-2">
                       <div className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-blue-300 flex-shrink-0" />
                       <p className="text-slate-200 font-medium text-base leading-relaxed">
-                        {job}
+                        {data.jobFunction}
                       </p>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
 

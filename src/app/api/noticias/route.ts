@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 // Importe a instância do Firestore do Firebase Admin SDK
 import { adminDB } from "@/lib/firebase-admin"; // Certifique-se de que o caminho está correto
 
-import { NoticiasResponse } from "@/types/news.types"; // Mantenha a importação do seu tipo
+import { NoticiaData, NoticiasResponse } from "@/types/news.types"; // Mantenha a importação do seu tipo
 
 export async function GET() {
   try {
@@ -62,5 +62,72 @@ export async function POST(request: Request) {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
+  }
+}
+
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const data: Partial<NoticiaData> = await request.json();
+
+    if (!id) {
+      return NextResponse.json(
+        { message: "ID da notícia não fornecido para atualização." },
+        { status: 400 }
+      );
+    }
+
+    console.log(`Tentando atualizar notícia com ID: ${id}`);
+    await adminDB.collection("noticias").doc(id).update(data);
+
+    return NextResponse.json(
+      { message: "Notícia atualizada com sucesso!" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Erro ao atualizar notícia (PUT):", error);
+    return NextResponse.json(
+      {
+        message: "Falha ao atualizar notícia",
+        error: (error as Error).message,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+
+    if (!id) {
+      return NextResponse.json(
+        { message: "ID da notícia não fornecido para exclusão." },
+        { status: 400 }
+      );
+    }
+
+    console.log(`Tentando excluir notícia com ID: ${id}`);
+    await adminDB.collection("noticias").doc(id).delete();
+
+    return NextResponse.json(
+      { message: "Notícia excluída com sucesso!" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Erro ao excluir notícia (DELETE):", error);
+    return NextResponse.json(
+      {
+        message: "Falha ao excluir notícia",
+        error: (error as Error).message,
+      },
+      { status: 500 }
+    );
   }
 }

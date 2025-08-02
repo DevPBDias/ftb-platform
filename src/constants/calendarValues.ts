@@ -1,4 +1,4 @@
-import { Championship } from "@/types/competicao.types";
+import { Championship } from "@/types/new-competition";
 
 export const GENDERS = [
   { value: "masculino", label: "Masculino" },

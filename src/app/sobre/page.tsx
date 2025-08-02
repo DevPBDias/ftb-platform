@@ -1,3 +1,5 @@
+"use client";
+
 import AboutHeroSection from "@/components/about/AboutHeroSection";
 import HistorySection from "@/components/about/HistorySection";
 import Mentions from "@/components/about/Mentions";

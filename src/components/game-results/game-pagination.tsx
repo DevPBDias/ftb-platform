@@ -27,7 +27,7 @@ export function GameDisplay() {
   } = useGames();
 
   return (
-    <main className="flex flex-1 flex-col gap-6 p-4 md:gap-8 md:p-8 bg-gray-50 dark:bg-gray-950">
+    <main className="flex flex-1 flex-col gap-6 p-4 md:gap-8 md:p-8">
       <div className="flex items-center">
         <h1 className="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-100">
           Resultados dos Jogos

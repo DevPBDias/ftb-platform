@@ -1,3 +1,4 @@
+// cards.types.ts
 import { StaticImageData } from "next/image";
 
 export type CardData = {
@@ -43,3 +44,12 @@ export interface GameCard {
   team2Score: number;
   team2Logo: string;
 }
+
+export type MemberFederation = {
+  id: string;
+  name: string;
+  jobFunction: string[]; // Aqui já está string[], conforme a saída do schema
+  history: string;
+  image?: StaticImageData | string;
+  category?: "member" | "mention";
+};

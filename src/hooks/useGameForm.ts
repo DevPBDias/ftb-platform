@@ -10,7 +10,7 @@ import {
   gameFormSchema,
 } from "@/schemas/basketball-calendar.schema";
 import { CHAMPIONSHIPS_DATABASE } from "@/constants/calendarValues";
-import { Championship } from "@/types/competicao.types";
+import { Championship } from "@/types/new-competition";
 
 export function useGameForm() {
   const [games, setGames] = useState<CalendarGame[]>([]);

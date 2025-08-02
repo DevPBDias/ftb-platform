@@ -17,6 +17,8 @@ const ContainerNewsEvents = ({
 }: ContainerNewsEventsProps) => {
   const { data: cards, loading, error } = useFetch<CardData[]>(`/api/${type}`);
 
+  const firstCards = [cards?.[0], cards?.[1], cards?.[2]];
+
   if (error) return <p className="text-red-500">Erro: {error}</p>;
 
   if (loading) {
@@ -46,7 +48,7 @@ const ContainerNewsEvents = ({
     );
   }
 
-  if (!cards || cards.length === 0)
+  if (!firstCards || firstCards.length === 0)
     return <p className="text-white">Nenhum clube encontrado.</p>;
 
   return (
@@ -61,7 +63,7 @@ const ContainerNewsEvents = ({
         {!turnOffBtn && (
           <Link
             href={`/${type}`}
-            className="group/btn relative flex items-center justify-center w-36 gap-2 px-4 py-2.5 bg-gradient-to-r from-[#162456] to-blue-600 hover:from-blue-600 hover:to-[#162456]
+            className="group/btn hidden lg:flex relative items-center justify-center w-36 gap-2 px-4 py-2.5 bg-gradient-to-r from-[#162456] to-blue-600 hover:from-blue-600 hover:to-[#162456]
              text-white font-medium text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
@@ -76,26 +78,31 @@ const ContainerNewsEvents = ({
         )}
       </header>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-20 w-full">
-        {cards.map((card, index) => (
-          <InfoCard key={card.id || index} data={card} type={type} />
+        {firstCards.map((card, index) => (
+          <InfoCard
+            key={card?.id || index}
+            // @ts-ignore
+            data={card ? card : undefined}
+            type={type}
+          />
         ))}
       </section>
-      {cards.length === 0 && !loading && (
+      {firstCards.length === 0 && !loading && (
         <p className="text-gray-500 italic">Nenhum {type} encontrado.</p>
       )}
       {!turnOffBtn && (
         <Link
           href={`/${type}`}
-          className="flex items-center mt-4 gap-2 bg-yellow-500 rounded-lg py-3 w-full lg:hidden justify-center hover:bg-yellow-600 hover:scale-105 transition-all duration-300 ease-in-out shadow-lg"
+          className="flex items-center mt-4 gap-2 bg-gradient-to-r from-[#162456] to-blue-600 rounded-lg py-3 w-full lg:hidden justify-center hover:from-blue-600 hover:to-[#162456] text-white hover:scale-105 transition-all duration-300 ease-in-out shadow-lg"
         >
-          <PlusCircle size={18} color="#010030" />
+          <PlusCircle size={18} color="white" />
           <p className="font-bold text-lg">{btnName}</p>
         </Link>
       )}
       {turnOffBtn && (
         <Link
           href={`/`}
-          className="flex items-center mt-4 gap-2 bg-yellow-500 rounded-lg py-3 w-full lg:hidden justify-center hover:bg-yellow-600 hover:scale-105 transition-all duration-300 ease-in-out shadow-lg"
+          className="flex items-center mt-4 gap-2 bg-gradient-to-r from-[#162456] to-blue-600 rounded-lg py-3 w-full lg:hidden justify-center text-white hover:scale-105 transition-all duration-300 ease-in-out shadow-lg"
         >
           <p className="font-bold text-lg">Voltar</p>
         </Link>

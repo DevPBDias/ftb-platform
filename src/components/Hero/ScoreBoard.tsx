@@ -48,10 +48,7 @@ export default function Schedule() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center w-full max-w-6xl mx-auto my-8 px-4 text-white">
-        <h3 className="text-white w-full text-left pl-6 text-2xl font-bold mb-4">
-          Resultados dos jogos
-        </h3>
-        <div className="text-lg">Carregando jogos...</div>
+        <p className="text-lg">Carregando jogos...</p>
       </div>
     );
   }

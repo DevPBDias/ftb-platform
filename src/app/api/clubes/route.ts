@@ -19,15 +19,20 @@ export async function GET() {
 
     const clubes: TeamData[] = [];
     snapshot.forEach((doc) => {
-      // O tipo 'TeamData' precisa ter 'id', 'teamName', 'logo'
-      // Garanta que os campos 'teamName' e 'logo' existem nos seus documentos do Firestore
-      const data = doc.data(); // doc.data() já retorna um objeto com os campos
+      const data = doc.data();
       clubes.push({
         id: doc.id,
-        teamName: data.teamName, // Confirme que 'teamName' é o nome do campo no Firestore
-        logo: data.logo, // Confirme que 'logo' é o nome do campo no Firestore
-        // Adicione outros campos de TeamData se existirem no Firestore
-      } as TeamData); // Cast para TeamData
+        teamName: data.teamName,
+        logo: data.logo,
+        image: data.image,
+        description: data.description,
+        founded: data.founded,
+        location: data.location,
+        contact: data.contact,
+        stats: data.stats,
+        championships: data.championships,
+        admins: data.admins,
+      } as TeamData);
     });
 
     console.log(`Número de clubes encontrados: ${clubes.length}`);

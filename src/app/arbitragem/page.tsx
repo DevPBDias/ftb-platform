@@ -4,10 +4,10 @@ import * as motion from "motion/react-client";
 import Navbar from "@/components/Hero/Navbar";
 import bg_referee from "@/assets/bg-referee.png";
 import Image from "next/image";
-import userPhoto from "@/assets/error-image.png";
 import LoadingThreeDotsJumping from "../../components/loading/LoadingBalls";
 import { useFetch } from "@/hooks/useFetch";
 import { Arbitro } from "@/types/referee.types";
+import { ArbitroCard } from "@/components/Card/ArbitroCard";
 
 const RefereePage = () => {
   const {
@@ -51,32 +51,11 @@ const RefereePage = () => {
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 justify-center w-full mt-8">
                 {arbitros.map((item) => (
-                  <motion.div
+                  <ArbitroCard
                     key={item.id}
-                    className="relative group w-full aspect-[3/4] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Image
-                      src={item.photo || userPhoto}
-                      alt={`Árbitro ${item.name}`}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-110"
-                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-3 md:p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <h4 className="text-sm md:text-base font-bold truncate">
-                        {item.name}
-                      </h4>
-                      <p className="text-xs md:text-sm font-normal mt-1">
-                        {item.experience} - {item.years}{" "}
-                        {item.years > 1 ? "anos" : "ano"}
-                      </p>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-center py-2 px-1 md:px-2 text-xs md:text-sm font-semibold group-hover:opacity-0 transition-opacity duration-300">
-                      {item.name}
-                    </div>
-                  </motion.div>
+                    arbitro={item}
+                    showActions={false}
+                  />
                 ))}
               </div>
             )}

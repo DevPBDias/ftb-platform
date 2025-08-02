@@ -18,8 +18,13 @@ export default function Component() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-gray-50 dark:bg-gray-950">
       <GameFilterProvider onCardClick={handleCardClick}>
-        <div className="grid min-h-screen w-full md:grid-cols-[280px_1fr]">
+        {/* Filtros no topo */}
+        <div className="w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm">
           <GameFilters />
+        </div>
+        
+        {/* Conteúdo principal */}
+        <div className="flex-1 w-full">
           <GameDisplay />
         </div>
 

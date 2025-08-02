@@ -126,3 +126,25 @@
 body {
   background: var(--background);
 }
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Timeline styles */
+.bg-timeline-light-blue {
+  background-color: #f8fafc;
+}
+
+.from-timeline-line-start {
+  --tw-gradient-from: #3b82f6;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0));
+}
+
+.to-timeline-line-end {
+  --tw-gradient-to: #1e40af;
+}
