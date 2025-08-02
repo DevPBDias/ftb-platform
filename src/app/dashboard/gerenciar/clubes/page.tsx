@@ -37,7 +37,27 @@ export default function EquipesManagement() {
         await updateClube(editingClube.id!, formData);
         toast.success("Clube atualizado com sucesso!");
       } else {
-        await createClube(formData);
+        // For creating, we need to ensure required fields are present
+        if (!formData.teamName) {
+          toast.error("Nome do clube é obrigatório");
+          return;
+        }
+        
+        // Create a new object with required fields for creation
+        const createData: Omit<TeamData, "id"> = {
+          teamName: formData.teamName,
+          logo: formData.logo,
+          image: formData.image,
+          founded: formData.founded,
+          description: formData.description,
+          location: formData.location,
+          stats: formData.stats,
+          championships: formData.championships,
+          admins: formData.admins,
+          contact: formData.contact,
+        };
+        
+        await createClube(createData);
         toast.success("Clube criado com sucesso!");
       }
     } catch (error) {
