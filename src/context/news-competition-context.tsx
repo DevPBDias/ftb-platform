@@ -27,11 +27,11 @@ interface BaseItemData {
 
 // Interfaces específicas
 export interface NoticiaData extends BaseItemData {
-  // Adicione propriedades específicas de Noticia se houver
+  // Propriedades específicas de Noticia podem ser adicionadas aqui
 }
 
 export interface CompeticaoData extends BaseItemData {
-  // Adicione propriedades específicas de Competicao se houver
+  // Propriedades específicas de Competicao podem ser adicionadas aqui
 }
 
 // ItemData será a união de NoticiaData e CompeticaoData, com um campo 'type' para diferenciação
@@ -223,9 +223,10 @@ export function NewsCompetitionsProvider({
         await apiUpdateItem(id, type, data);
         toast.success("Item atualizado com sucesso!");
         await loadItems(); // Refetch all items to ensure consistency
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("Failed to update item:", err);
-        toast.error(err.message || "Erro ao atualizar item.");
+        const errorMessage = err instanceof Error ? err.message : "Erro ao atualizar item.";
+        toast.error(errorMessage);
         throw new Error("Erro ao atualizar item.");
       }
     },
@@ -238,9 +239,10 @@ export function NewsCompetitionsProvider({
         await apiDeleteItem(id, type);
         toast.success("Item excluído com sucesso!");
         await loadItems(); // Refetch all items
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("Failed to delete item:", err);
-        toast.error(err.message || "Erro ao excluir item.");
+        const errorMessage = err instanceof Error ? err.message : "Erro ao excluir item.";
+        toast.error(errorMessage);
         throw new Error("Erro ao excluir item.");
       }
     },

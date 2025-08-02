@@ -31,7 +31,7 @@ export default function EquipesManagement() {
     clube.teamName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSubmit = async (formData: any) => {
+  const handleSubmit = async (formData: Partial<TeamData>) => {
     try {
       if (editingClube) {
         await updateClube(editingClube.id!, formData);

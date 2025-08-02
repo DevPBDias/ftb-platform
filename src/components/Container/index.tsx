@@ -81,8 +81,7 @@ const ContainerNewsEvents = ({
         {firstCards.map((card, index) => (
           <InfoCard
             key={card?.id || index}
-            // @ts-ignore
-            data={card ? card : undefined}
+            data={card || undefined}
             type={type}
           />
         ))}

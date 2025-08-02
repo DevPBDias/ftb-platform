@@ -9,7 +9,7 @@ import { TeamData } from "@/types/teams";
 interface ClubeFormProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (formData: any) => Promise<void>;
+  onSubmit: (formData: Partial<TeamData>) => Promise<void>;
   editingClube: TeamData | null;
 }
 

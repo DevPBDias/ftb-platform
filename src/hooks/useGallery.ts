@@ -1,6 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-export function useGallery(images: any[]) {
+interface GalleryImage {
+  src: string | { src: string };
+  alt: string;
+  title: string;
+  description: string;
+  category?: string;
+}
+
+export function useGallery(images: GalleryImage[]) {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const openLightbox = (index: number) => {
@@ -13,7 +21,7 @@ export function useGallery(images: any[]) {
     document.body.style.overflow = "unset";
   };
 
-  const navigateImage = (direction: "prev" | "next") => {
+  const navigateImage = useCallback((direction: "prev" | "next") => {
     if (selectedImage === null) return;
 
     if (direction === "prev") {
@@ -25,7 +33,7 @@ export function useGallery(images: any[]) {
         selectedImage === images.length - 1 ? 0 : selectedImage + 1
       );
     }
-  };
+  }, [selectedImage, images.length]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -47,7 +55,7 @@ export function useGallery(images: any[]) {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [selectedImage]);
+  }, [selectedImage, navigateImage, closeLightbox]);
 
   return {
     selectedImage,
