@@ -51,7 +51,7 @@ export default function NewsManagement({ activeTab }: NewsManagementProps) {
     descricao: string;
     datas: Date[];
     local: string;
-    image: string;
+    image?: string;
   }) => {
     try {
       // Converter Date objects para strings YYYY-MM-DD
