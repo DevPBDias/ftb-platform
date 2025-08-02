@@ -127,7 +127,7 @@ export default function MembersManagement() {
         ? member.jobFunction.join(", ") 
         : member.jobFunction,
       history: member.history,
-      image: member.image || "",
+      image: typeof member.image === 'string' ? member.image : member.image?.src || "",
       category: member.category || "member"
     });
     setIsDialogOpen(true);
