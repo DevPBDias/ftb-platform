@@ -78,13 +78,15 @@ const ContainerNewsEvents = ({
         )}
       </header>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-20 w-full">
-        {firstCards.map((card, index) => (
-          <InfoCard
-            key={card?.id || index}
-            data={card || undefined}
-            type={type}
-          />
-        ))}
+        {firstCards
+          .filter((card): card is CardData => card !== undefined)
+          .map((card, index) => (
+            <InfoCard
+              key={card.id || index}
+              data={card}
+              type={type}
+            />
+          ))}
       </section>
       {firstCards.length === 0 && !loading && (
         <p className="text-gray-500 italic">Nenhum {type} encontrado.</p>
