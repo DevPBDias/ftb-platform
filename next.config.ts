@@ -24,11 +24,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Configuração para garantir que as rotas da API sejam dinâmicas
-  experimental: {
-    serverActions: true,
-  },
-  // Configuração para lidar com CORS
+
   async headers() {
     return [
       {
