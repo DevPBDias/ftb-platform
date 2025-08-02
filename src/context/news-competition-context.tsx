@@ -16,7 +16,7 @@ import { StaticImageData } from "next/image"; // Importar StaticImageData
 export type ItemType = "noticia" | "competicao" | "ambos";
 
 // Interface base para os dados, comum entre NoticiaData e CompeticaoData
-interface BaseItemData {
+export interface BaseItemData {
   id: string; // ID agora é obrigatório para itens no contexto
   titulo: string;
   descricao: string;
@@ -25,14 +25,9 @@ interface BaseItemData {
   image?: string | StaticImageData; // Alterado para incluir StaticImageData
 }
 
-// Interfaces específicas
-export interface NoticiaData extends BaseItemData {
-  // Propriedades específicas de Noticia podem ser adicionadas aqui
-}
-
-export interface CompeticaoData extends BaseItemData {
-  // Propriedades específicas de Competicao podem ser adicionadas aqui
-}
+// Type aliases para NoticiaData e CompeticaoData
+export type NoticiaData = BaseItemData;
+export type CompeticaoData = BaseItemData;
 
 // ItemData será a união de NoticiaData e CompeticaoData, com um campo 'type' para diferenciação
 export type ItemData =
