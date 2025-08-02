@@ -26,7 +26,7 @@ type FormData = {
   descricao: string;
   datas: Date[];
   local: string;
-  image: string;
+  image?: string;
 };
 
 interface NewsFormModalProps {
