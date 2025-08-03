@@ -10,6 +10,7 @@ export const SummaryCard = React.memo(function SummaryCard() {
   const {
     teamName,
     teamCategory,
+    championshipName,
     people,
     allPeople,
     editingPersonId,
@@ -27,6 +28,7 @@ export const SummaryCard = React.memo(function SummaryCard() {
 
   const handleFullSubmission = () => {
     handleSubmitRelation({
+      championshipName,
       teamName,
       teamCategory,
       people,
@@ -45,6 +47,13 @@ export const SummaryCard = React.memo(function SummaryCard() {
           <div className="flex items-baseline gap-2">
             <p className="font-semibold text-gray-700">Nome da Equipe:</p>
             <p className="text-gray-900 font-bold">{teamName}</p>
+          </div>
+        )}
+
+        {championshipName && (
+          <div className="flex items-baseline gap-2">
+            <p className="font-semibold text-gray-700">Torneio:</p>
+            <p className="text-gray-900 font-bold">{championshipName}</p>
           </div>
         )}
 

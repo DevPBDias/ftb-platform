@@ -8,6 +8,8 @@ import logoFTB from "@/assets/logo_ftb.png";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "../ui/theme-toggle";
+import { Button } from "../ui/button";
 
 // Componente Logo
 const Logo = ({ closeMenu }: { closeMenu: () => void }) => (
@@ -70,7 +72,7 @@ const DesktopNav = () => (
 // Componente Social Media
 const SocialMedia = ({ closeMenu }: { closeMenu?: () => void }) => (
   <motion.div
-    className="hidden lg:flex items-center space-x-2 gap-2"
+    className="hidden lg:flex items-center gap-2"
     initial={{ opacity: 0, x: 50 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.6, delay: 0.4 }}
@@ -81,20 +83,29 @@ const SocialMedia = ({ closeMenu }: { closeMenu?: () => void }) => (
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
-        className="cursor-pointer hover:scale-110 transition-all duration-300"
+        className="flex items-center"
       >
         <Link
           href={item.link}
           target={item.name === "Login" ? "_self" : "_blank"}
           rel="noopener noreferrer"
-          className="p-3 text-white/80 hover:text-white rounded-lg transition-all duration-300 group"
+          className="p-1 text-white/80 hover:text-white rounded-lg transition-all duration-300 group hover:scale-110 cursor-pointer"
           aria-label={item.name}
           onClick={closeMenu}
         >
-          <item.icon size={24} />
+          {item.name !== "Login" && <item.icon size={24} />}
         </Link>
+        {
+          item.name === "Login" && (
+            <Link href="/login" className="flex items-center gap-2 text-sm bg-white px-4 py-2 hover:bg-yellow-400 hover:text-black text-black rounded-lg transition-all duration-300 group cursor-pointer border-none dark:hover:bg-yellow-400 dark:hover:text-black dark:text-black dark:bg-white">
+              <item.icon size={18} />
+              Login 
+            </Link>
+          )
+        }
       </motion.div>
     ))}
+    <ThemeToggle />
   </motion.div>
 );
 

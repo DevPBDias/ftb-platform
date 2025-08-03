@@ -22,9 +22,12 @@ function TeamRegistrationFormContent() {
     useTeamFormContext();
 
   return (
-    <main className="">
+    <main className="flex flex-col items-center">
       <ModernNavbar />
 
+      <p className="text-red-500 font-bold mt-6 uppercase">
+        Pagina em construção
+      </p>
       <main className="container mx-auto p-6 md:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
         <FormSection />
         <SummaryCard />

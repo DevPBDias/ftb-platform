@@ -34,3 +34,38 @@ export interface Championship {
   id: string;
   name: string;
 }
+
+export interface Player {
+  id: string;
+  name: string;
+  document: string;
+}
+
+export interface Coach {
+  id: string;
+  name: string;
+  document?: string;
+}
+
+export interface Assistant {
+  id: string;
+  name: string;
+  document?: string;
+}
+
+export interface TeamRelation {
+  id: string;
+  name: string;
+  coach: Coach | null;
+  assistant: Assistant[] | null;
+  players: Player[];
+  category: string;
+  paymentStatus: boolean;
+  paymentDate?: string;
+}
+
+export type ChampionshipsDataDB = {
+  name: string;
+  category: string;
+  teams: TeamRelation[];
+};

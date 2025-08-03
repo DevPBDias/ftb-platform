@@ -9,6 +9,8 @@ interface TeamFormContextType {
   setTeamName: (value: string) => void;
   teamCategory: string;
   setTeamCategory: (value: string) => void;
+  championshipName: string;
+  setChampionshipName: (value: string) => void;
   people: Person[];
   currentTeamInput: string;
   setCurrentTeamInput: (value: string) => void;
@@ -34,6 +36,7 @@ interface TeamFormContextType {
   isLoading: boolean;
   showSuccessModal: boolean;
   handleSubmitRelation: (data: {
+    championshipName: string;
     teamName: string;
     teamCategory: string;
     people: Person[];

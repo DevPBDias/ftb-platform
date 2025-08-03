@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import type { Person } from "./use-team-form"; // Import Person interface
 
 interface SubmissionData {
+  championshipName: string;
   teamName: string;
   teamCategory: string;
   people: Person[]; // Changed to a single 'people' array

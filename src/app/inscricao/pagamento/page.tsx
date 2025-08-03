@@ -16,7 +16,7 @@ export default function PixPaymentPage() {
   const handleCopy = () => {
     navigator.clipboard.writeText(pixCode);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // Reset "Copied!" state after 2 seconds
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (

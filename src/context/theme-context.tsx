@@ -28,13 +28,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>("light");
 
   useEffect(() => {
+    // Verificar se há um tema salvo no localStorage
     const savedTheme = localStorage.getItem("theme") as Theme;
     if (savedTheme) {
       setThemeState(savedTheme);
-    } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setThemeState(prefersDark ? "dark" : "light");
     }
+    // Se não houver tema salvo, mantém o padrão "light"
   }, []);
 
   useEffect(() => {

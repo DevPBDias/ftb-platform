@@ -12,6 +12,7 @@ export interface Person {
 export function useTeamForm() {
   const [teamName, setTeamName] = useState("");
   const [teamCategory, setTeamCategory] = useState("");
+  const [championshipName, setChampionshipName] = useState("");
   // Consolidated state for all people (coach, assistants, players)
   const [people, setPeople] = useState<Person[]>([]);
 
@@ -154,6 +155,8 @@ export function useTeamForm() {
     setTeamName,
     teamCategory,
     setTeamCategory,
+    championshipName,
+    setChampionshipName,
     people, // Expose the consolidated people array
     currentTeamInput,
     setCurrentTeamInput,

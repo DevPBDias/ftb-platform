@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, History, Award, Settings, Newspaper } from "lucide-react";
+import { Users, History, Award, Settings, Newspaper, ToggleLeft } from "lucide-react";
+import { ConfigDebug } from "@/components/ui/config-debug";
+import { ConfigCard } from "@/components/dashboard/ConfigCard";
+import { ConfigTest } from "@/components/ui/config-test";
 
 const Maindashboard = () => {
   return (
@@ -17,6 +20,15 @@ const Maindashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Configurações */}
+        <ConfigCard />
+        
+        {/* Debug - Temporário */}
+        <ConfigDebug />
+        
+        {/* Teste - Contexto Recriado */}
+        <ConfigTest />
+
         {/* Tabela de Jogos */}
         <Link href="/dashboard/tabela">
           <Card className="hover:shadow-lg transition-shadow cursor-pointer">

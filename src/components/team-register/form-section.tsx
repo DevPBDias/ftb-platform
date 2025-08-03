@@ -21,6 +21,8 @@ export const FormSection = React.memo(function FormSection() {
     handleAddTeam,
     teamCategory,
     setTeamCategory,
+    championshipName,
+    setChampionshipName,
     currentPersonNameInput,
     setCurrentPersonNameInput,
     currentPersonDocumentInput,
@@ -39,6 +41,17 @@ export const FormSection = React.memo(function FormSection() {
     "Adulto",
     "Veterano",
   ];
+
+  const championships = [
+    "Campeonato Tocantinense",
+    "JETS",
+    "Taça 13",
+    "Eliminatórias 3x3 - JEBS",
+    "Eliminatórias 5x5 - JEBS",
+    "Eliminatórias 3x3 - JUBS",
+    "Eliminatórias 5x5 - JUBS",
+  ];
+
   const personRoles = ["coach", "assistant", "player"] as Person["role"][];
 
   return (
@@ -46,6 +59,33 @@ export const FormSection = React.memo(function FormSection() {
       <h1 className="text-3xl font-bold text-gray-800 mb-6">
         Inscreva o seu time aqui
       </h1>
+
+      <div className="space-y-2">
+        <label
+          htmlFor="championship-name"
+          className="text-lg font-medium text-gray-700"
+        >
+          Nome do Torneio
+        </label>
+        <Select
+          onValueChange={(value) => setChampionshipName(value)}
+          value={championshipName}
+        >
+          <SelectTrigger
+            id="championship-name"
+            className="w-full rounded-lg px-4 py-2 mt-2 border border-gray-300 focus:ring-2 focus:ring-gradient-orange-start focus:border-transparent transition-all duration-200"
+          >
+            <SelectValue placeholder="Selecione o torneio" />
+          </SelectTrigger>
+          <SelectContent>
+            {championships.map((item) => (
+              <SelectItem key={item} value={item}>
+                {item}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
 
       {/* Equipe e Categoria por Idade na mesma linha */}
       <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4">
