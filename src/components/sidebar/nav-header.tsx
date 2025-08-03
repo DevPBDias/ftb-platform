@@ -8,13 +8,9 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb-link";
-import { useState } from "react";
-import { Button } from "../ui/button";
-import { Moon, Sun } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const NavHeader = () => {
-  const [isDark, setIsDark] = useState(true);
-
   return (
     <header className="bg-sidebar text-sidebar-foreground w-full pr-4 border-b flex h-16 shrink-0 items-center justify-between gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
       <div className="flex items-center gap-2 px-4">
@@ -33,25 +29,7 @@ const NavHeader = () => {
         </Breadcrumb>
       </div>
       <div className="flex items-center">
-        {isDark ? (
-          <Button
-            onClick={() => setIsDark(!isDark)}
-            variant="secondary"
-            size="icon"
-            className="size-8 cursor-pointer"
-          >
-            <Moon />
-          </Button>
-        ) : (
-          <Button
-            onClick={() => setIsDark(!isDark)}
-            variant="secondary"
-            size="icon"
-            className="size-8 cursor-pointer"
-          >
-            <Sun />
-          </Button>
-        )}
+        <ThemeToggle />
       </div>
     </header>
   );

@@ -45,20 +45,10 @@ const Teams = () => {
           </h1>
           <div className="grid grid-cols-3 gap-3 md:gap-6 items-center justify-center">
             {clubes?.map((team) => (
-              <>
-                {team.logo === "TIOS" ? (
-                  <p
-                    key={team.id}
-                    onClick={() => route.push(`/clubes/${team.id}`)}
-                    className="cursor-pointer w-20 h-20 md:w-32 md:h-32 rounded-lg flex items-center justify-center uppercase text-red-500 font-bold text-5xl border-2 border-white transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-white"
-                  >
-                    {team.logo}
-                  </p>
-                ) : (
                   <picture
-                    key={team.id}
-                    className="cursor-pointer w-20 h-20 md:w-32 md:h-32 rounded-lg border-2 border-white transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-amber-500"
+                    className="cursor-pointer w-20 h-20 md:w-32 md:h-32 rounded-lg hover:scale-105"
                     onClick={() => route.push(`/clubes/${team.id}`)}
+                    key={team.id}
                   >
                     <Image
                       width={100}
@@ -69,8 +59,6 @@ const Teams = () => {
                       className="w-full h-full object-cover rounded-lg"
                     />
                   </picture>
-                )}
-              </>
             ))}
           </div>
         </motion.div>
