@@ -256,10 +256,6 @@ Acesse [http://localhost:3000](http://localhost:3000) para ver a aplicação.
 - **Instagram**: [@basquetetocantins](https://www.instagram.com/basquetetocantins/)
 - **Localização**: Tocantins, Brasil
 
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
 ## 🙏 Agradecimentos
 
 - **Federação Tocantinense de Basketball** pela confiança
